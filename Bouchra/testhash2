@@ -1,0 +1,62 @@
+#! /ucrt64/bin/vvp
+:ivl_version "13.0 (stable)" "(v13_0)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "C:\msys64\ucrt64\lib\ivl\system.vpi";
+:vpi_module "C:\msys64\ucrt64\lib\ivl\vhdl_sys.vpi";
+:vpi_module "C:\msys64\ucrt64\lib\ivl\vhdl_textio.vpi";
+:vpi_module "C:\msys64\ucrt64\lib\ivl\v2005_math.vpi";
+:vpi_module "C:\msys64\ucrt64\lib\ivl\va_math.vpi";
+S_000001DAF607B5E0 .scope module, "hash_function2_tb" "hash_function2_tb" 2 3;
+ .timescale -9 -12;
+v000001DAF60B11A0_0 .net "index", 7 0, L_000001DAF60B0E80;  1 drivers
+v000001DAF60B0D40_0 .var "key", 31 0;
+S_000001DAF607B770 .scope module, "uut" "hash_function2" 2 8, 3 1 0, S_000001DAF607B5E0;
+ .timescale 0 0;
+    .port_info 0 /INPUT 32 "key";
+    .port_info 1 /OUTPUT 8 "index";
+L_000001DAF60B4C60 .functor XOR 8, L_000001DAF60B0B60, L_000001DAF60B14C0, C4<00000000>, C4<00000000>;
+L_000001DAF60B4560 .functor XOR 8, L_000001DAF60B1740, L_000001DAF60B0CA0, C4<00000000>, C4<00000000>;
+v000001DAF60B9F20_0 .net *"_ivl_1", 7 0, L_000001DAF60B0B60;  1 drivers
+v000001DAF60A0CE0_0 .net *"_ivl_10", 7 0, L_000001DAF60B4560;  1 drivers
+v000001DAF60B0FC0_0 .net *"_ivl_3", 7 0, L_000001DAF60B14C0;  1 drivers
+v000001DAF60B1560_0 .net *"_ivl_4", 7 0, L_000001DAF60B4C60;  1 drivers
+v000001DAF60B0DE0_0 .net *"_ivl_7", 7 0, L_000001DAF60B1740;  1 drivers
+v000001DAF60B1100_0 .net *"_ivl_9", 7 0, L_000001DAF60B0CA0;  1 drivers
+v000001DAF60B1060_0 .net "index", 7 0, L_000001DAF60B0E80;  alias, 1 drivers
+v000001DAF60B1380_0 .net "key", 31 0, v000001DAF60B0D40_0;  1 drivers
+L_000001DAF60B0B60 .part v000001DAF60B0D40_0, 24, 8;
+L_000001DAF60B14C0 .part v000001DAF60B0D40_0, 0, 8;
+L_000001DAF60B1740 .part v000001DAF60B0D40_0, 16, 8;
+L_000001DAF60B0CA0 .part v000001DAF60B0D40_0, 8, 8;
+L_000001DAF60B0E80 .arith/sum 8, L_000001DAF60B4C60, L_000001DAF60B4560;
+    .scope S_000001DAF607B5E0;
+T_0 ;
+    %vpi_call 2 15 "$dumpfile", "hash_function2.vcd" {0 0 0};
+    %vpi_call 2 16 "$dumpvars", 32'sb00000000000000000000000000000000, S_000001DAF607B5E0 {0 0 0};
+    %vpi_call 2 18 "$display", "Key (hex) | Hash2 Index" {0 0 0};
+    %pushi/vec4 1, 0, 32;
+    %store/vec4 v000001DAF60B0D40_0, 0, 32;
+    %delay 10000, 0;
+    %vpi_call 2 22 "$display", "%h | %h", v000001DAF60B0D40_0, v000001DAF60B11A0_0 {0 0 0};
+    %pushi/vec4 305419896, 0, 32;
+    %store/vec4 v000001DAF60B0D40_0, 0, 32;
+    %delay 10000, 0;
+    %vpi_call 2 26 "$display", "%h | %h", v000001DAF60B0D40_0, v000001DAF60B11A0_0 {0 0 0};
+    %pushi/vec4 4294967295, 0, 32;
+    %store/vec4 v000001DAF60B0D40_0, 0, 32;
+    %delay 10000, 0;
+    %vpi_call 2 30 "$display", "%h | %h", v000001DAF60B0D40_0, v000001DAF60B11A0_0 {0 0 0};
+    %pushi/vec4 2864434397, 0, 32;
+    %store/vec4 v000001DAF60B0D40_0, 0, 32;
+    %delay 10000, 0;
+    %vpi_call 2 34 "$display", "%h | %h", v000001DAF60B0D40_0, v000001DAF60B11A0_0 {0 0 0};
+    %vpi_call 2 36 "$finish" {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "testbenches/hash_function2_tb.v";
+    "src/hash_function2.v";
