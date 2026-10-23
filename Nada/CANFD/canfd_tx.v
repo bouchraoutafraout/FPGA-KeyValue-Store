@@ -12,38 +12,37 @@ module canfd_tx #(
     input  wire [63:0] data,
     input  wire [3:0]  dlc,
 
+    input  wire        can_rx,
+
     output reg         can_tx,
     output reg         busy,
-    output reg         done
+    output reg         done,
+    output reg         ack_error
 );
 
-    // ==========================================
-    // 1. MACHINE A ETATS
-    // ==========================================
+    localparam [3:0]
+        IDLE      = 4'd0,
+        PREP      = 4'd1,
+        SEND      = 4'd2,
+        WAIT_LAST = 4'd3,
+        CRC_SBC   = 4'd4,
+        CRC_LOAD  = 4'd5,
+        CRC_SEND  = 4'd6,
+        TAIL      = 4'd7,
+        FINISH    = 4'd8;
 
-    localparam IDLE      = 3'd0;
-    localparam PREP      = 3'd1;
-    localparam SEND      = 3'd2;
-    localparam WAIT_LAST = 3'd3;
-    localparam CRC_LOAD  = 3'd4;
-    localparam CRC_SEND  = 3'd5;
-    localparam TAIL      = 3'd6;
-    localparam FINISH    = 3'd7;
-
-    reg [2:0] state;
-
-    // ==========================================
-    // 2. REGISTRES DE TRANSMISSION
-    // ==========================================
+    reg [3:0] state;
 
     reg [85:0] payload;
-
     reg [6:0] total_bits;
     reg [6:0] bit_index;
 
     reg [16:0] crc_final;
     reg [7:0] stuff_final;
     reg prev_final;
+
+    reg [3:0] sbc_final;
+    reg [1:0] sbc_index;
 
     reg [3:0] tail_index;
     reg tail_valid;
@@ -52,7 +51,7 @@ module canfd_tx #(
     wire tick;
 
     // ==========================================
-    // 3. BIT TIMER
+    // BIT TIMER
     // ==========================================
 
     canfd_bit_timer #(
@@ -68,7 +67,7 @@ module canfd_tx #(
     );
 
     // ==========================================
-    // 4. DYNAMIC BIT STUFFING
+    // DYNAMIC STUFFING
     // ==========================================
 
     wire clear_stuff = (state == PREP);
@@ -83,7 +82,6 @@ module canfd_tx #(
     wire out_valid;
     wire out_bit;
     wire out_is_stuff;
-
     wire [7:0] stuff_count;
 
     canfd_stuffer stuffer (
@@ -91,30 +89,48 @@ module canfd_tx #(
         .rst(rst),
         .clear(clear_stuff),
         .tick(tick),
-
         .in_valid(in_valid),
         .in_bit(in_bit),
-
         .in_take(in_take),
         .out_valid(out_valid),
         .out_bit(out_bit),
         .out_is_stuff(out_is_stuff),
-
         .stuff_cnt(stuff_count)
     );
 
     // ==========================================
-    // 5. CRC-17
+    // STUFF BIT COUNT
+    // ==========================================
+
+    function [3:0] make_sbc;
+        input [2:0] count;
+        reg [2:0] gray;
+        begin
+            gray = count ^ (count >> 1);
+            make_sbc = {gray, ^gray};
+        end
+    endfunction
+
+    // ==========================================
+    // CRC-17
     // ==========================================
 
     wire [16:0] crc_value;
 
     wire crc_init = (state == PREP);
 
-    wire crc_en =
+    wire crc_payload_en =
         out_valid &&
         ((state == SEND) ||
          (state == WAIT_LAST));
+
+    wire crc_sbc_en = (state == CRC_SBC);
+    wire crc_en = crc_payload_en || crc_sbc_en;
+
+    wire crc_din =
+        crc_sbc_en ?
+        sbc_final[3 - sbc_index] :
+        out_bit;
 
     canfd_crc #(
         .WIDTH(17),
@@ -125,12 +141,12 @@ module canfd_tx #(
         .rst(rst),
         .load_init(crc_init),
         .en(crc_en),
-        .din(out_bit),
+        .din(crc_din),
         .crc(crc_value)
     );
 
     // ==========================================
-    // 6. CHAMP CRC
+    // CRC FIELD
     // ==========================================
 
     reg crc_load;
@@ -145,25 +161,46 @@ module canfd_tx #(
         .clk(clk),
         .rst(rst),
         .load(crc_load),
-
         .prev_bit(prev_final),
         .stuff_mod8(stuff_final[2:0]),
-
         .crc({4'd0, crc_final}),
         .is21(1'b0),
-
         .tick(tick),
-
         .out_valid(crc_valid),
         .out_bit(crc_bit),
         .out_is_fsb(crc_fsb),
-
         .done(crc_done),
         .active(crc_active)
     );
 
     // ==========================================
-    // 7. MACHINE PRINCIPALE
+    // ACK : ECHANTILLONNAGE DU BUS
+    // ==========================================
+
+    // Cette version utilise 1 Mbit/s.
+    // Echantillonnage au milieu du bit ACK.
+    localparam integer HALF_BIT_CLKS =
+        CLK_FREQ / (2 * 1_000_000);
+
+    reg [31:0] ack_counter;
+    reg ack_sampling;
+
+    // Synchronisation de can_rx sur clk.
+    reg can_rx_meta;
+    reg can_rx_sync;
+
+    always @(posedge clk) begin
+        if (rst) begin
+            can_rx_meta <= 1'b1;
+            can_rx_sync <= 1'b1;
+        end else begin
+            can_rx_meta <= can_rx;
+            can_rx_sync <= can_rx_meta;
+        end
+    end
+
+    // ==========================================
+    // MACHINE PRINCIPALE
     // ==========================================
 
     always @(posedge clk) begin
@@ -180,11 +217,18 @@ module canfd_tx #(
             stuff_final <= 0;
             prev_final <= 1'b1;
 
+            sbc_final <= 0;
+            sbc_index <= 0;
+
             tail_index <= 0;
             tail_valid <= 0;
 
             timer_run <= 0;
             crc_load <= 0;
+
+            ack_counter <= 0;
+            ack_sampling <= 0;
+            ack_error <= 0;
 
             can_tx <= 1'b1;
             busy <= 0;
@@ -196,52 +240,42 @@ module canfd_tx #(
             crc_load <= 1'b0;
             tail_valid <= 1'b0;
 
-            // ==================================
-            // SORTIE DES BITS UTILES ET STUFFING
-            // ==================================
-
             if (out_valid &&
-                ((state == SEND) ||
-                 (state == WAIT_LAST))) begin
-
+                (state == SEND ||
+                 state == WAIT_LAST))
                 can_tx <= out_bit;
 
-            end
-
-            // ==================================
-            // SORTIE DU CHAMP CRC
-            // ==================================
-
-            if (crc_valid &&
-                state == CRC_SEND) begin
-
+            if (crc_valid && state == CRC_SEND)
                 can_tx <= crc_bit;
 
+            // Mesurer can_rx au milieu de l'ACK slot.
+            if (ack_sampling) begin
+                if (ack_counter == HALF_BIT_CLKS - 1) begin
+                    ack_error <= (can_rx_sync !== 1'b0);
+                    ack_sampling <= 1'b0;
+                end else begin
+                    ack_counter <= ack_counter + 1;
+                end
             end
 
             case (state)
 
-                // ==============================
-                // IDLE
-                // ==============================
-
                 IDLE: begin
-
-                    timer_run <= 1'b0;
-                    can_tx <= 1'b1;
-                    busy <= 1'b0;
+                    timer_run <= 0;
+                    can_tx <= 1;
+                    busy <= 0;
 
                     if (start) begin
 
                         payload <= {
-                            1'b0,       // SOF
-                            can_id,     // Identifiant
-                            1'b1,       // RRS
-                            1'b0,       // IDE
-                            1'b1,       // FDF
-                            1'b0,       // res
-                            1'b0,       // BRS
-                            1'b0,       // ESI
+                            1'b0,
+                            can_id,
+                            1'b1,
+                            1'b0,
+                            1'b1,
+                            1'b0,
+                            1'b0,
+                            1'b0,
                             dlc,
                             data
                         };
@@ -252,168 +286,110 @@ module canfd_tx #(
                         bit_index <= 0;
                         tail_index <= 0;
 
-                        busy <= 1'b1;
+                        ack_counter <= 0;
+                        ack_sampling <= 0;
+                        ack_error <= 1'b1;
+
+                        busy <= 1;
                         state <= PREP;
-
                     end
-
                 end
-
-                // ==============================
-                // PREPARATION
-                // ==============================
 
                 PREP: begin
-
-                    timer_run <= 1'b0;
+                    timer_run <= 0;
                     state <= SEND;
-
                 end
 
-                // ==============================
-                // ENVOI EN-TETE + DONNEES
-                // ==============================
-
                 SEND: begin
-
-                    timer_run <= 1'b1;
+                    timer_run <= 1;
 
                     if (in_take) begin
-
                         bit_index <= bit_index + 1'b1;
 
                         if (bit_index == total_bits - 1)
                             state <= WAIT_LAST;
-
                     end
-
                 end
-
-                // ==============================
-                // DERNIER BIT + STUFFING FINAL
-                // ==============================
 
                 WAIT_LAST: begin
-
                     if (out_valid) begin
 
-                        // Correction :
-                        // Si les 5 derniers bits emis
-                        // sont identiques, attendre
-                        // le bit de stuffing final.
+                        prev_final <= out_bit;
+                        stuff_final <= stuff_count;
 
-                        if (out_is_stuff ||
-                            (stuffer.run != 3'd5)) begin
+                        sbc_final <=
+                            make_sbc(stuff_count[2:0]);
 
-                            // Dernier bit reellement emis
-                            prev_final <= out_bit;
-
-                            // Nombre final de stuff bits
-                            stuff_final <= stuff_count;
-
-                            // Le CRC ne sera charge
-                            // qu'apres le dernier bit
-                            // de stuffing necessaire.
-                            state <= CRC_LOAD;
-
-                        end
-
+                        sbc_index <= 0;
+                        state <= CRC_SBC;
                     end
-
                 end
 
-                // ==============================
-                // CHARGEMENT DU CRC
-                // ==============================
+                CRC_SBC: begin
+                    if (sbc_index == 2'd3)
+                        state <= CRC_LOAD;
+                    else
+                        sbc_index <= sbc_index + 1'b1;
+                end
 
                 CRC_LOAD: begin
-
                     crc_final <= crc_value;
-
-                    crc_load <= 1'b1;
-
+                    crc_load <= 1;
                     state <= CRC_SEND;
-
                 end
-
-                // ==============================
-                // ENVOI DU CHAMP CRC
-                // ==============================
 
                 CRC_SEND: begin
-
                     if (crc_done) begin
-
                         tail_index <= 0;
                         state <= TAIL;
-
                     end
-
                 end
-
-                // ==============================
-                // FIN DE TRAME
-                // ==============================
 
                 TAIL: begin
 
                     if (tick) begin
 
-                        tail_valid <= 1'b1;
+                        tail_valid <= 1;
 
-                        if (tail_index == 4'd9) begin
+                        // tail_index 0 : CRC delimiter
+                        // tail_index 1 : ACK slot
+                        // tail_index 2 : ACK delimiter
+                        // tail_index 3..9 : EOF
 
-                            state <= FINISH;
-
-                        end else begin
-
-                            tail_index <=
-                                tail_index + 1'b1;
-
+                        if (tail_index == 4'd1) begin
+                            ack_counter <= 0;
+                            ack_sampling <= 1;
                         end
 
+                        if (tail_index == 4'd9)
+                            state <= FINISH;
+                        else
+                            tail_index <= tail_index + 1'b1;
                     end
 
-                    // Mise a jour avec un cycle
-                    // de latence apres tail_valid,
-                    // comme dans la version testee.
-                    if (tail_valid) begin
-
+                    // Le transmetteur reste recessif
+                    // pendant delimiter, ACK et EOF.
+                    if (tail_valid)
                         can_tx <= 1'b1;
-
-                    end
 
                 end
 
-                // ==============================
-                // TRANSMISSION TERMINEE
-                // ==============================
-
                 FINISH: begin
-
                     if (tick) begin
-
-                        timer_run <= 1'b0;
-                        busy <= 1'b0;
-                        done <= 1'b1;
-
+                        timer_run <= 0;
+                        busy <= 0;
+                        done <= 1;
                         state <= IDLE;
-
                     end
-
                 end
 
                 default: begin
-
                     state <= IDLE;
-                    timer_run <= 1'b0;
-
+                    timer_run <= 0;
                 end
 
             endcase
-
         end
-
     end
 
 endmodule
