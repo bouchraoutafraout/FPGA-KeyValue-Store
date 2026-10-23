@@ -43,8 +43,7 @@ module canfd_bits_tb;
         .done(done)
     );
 
-    // Observer les sorties du stuffer
-    // apres les mises a jour du front montant.
+    // Verification des bits utiles et du stuffing
     always @(negedge clk) begin
 
         if (!rst && monitor_enable &&
@@ -65,19 +64,16 @@ module canfd_bits_tb;
                     );
 
                     errors = errors + 1;
-
                 end
 
-            end
-            else begin
+            end else begin
 
                 if (useful_bits >= total_bits_expected) begin
 
                     $display("FAIL : bit utile supplementaire");
                     errors = errors + 1;
 
-                end
-                else begin
+                end else begin
 
                     expected_bit =
                         expected_payload[85-useful_bits];
@@ -92,9 +88,7 @@ module canfd_bits_tb;
                         );
 
                         errors = errors + 1;
-
                     end
-
                 end
 
                 if (run_length == 5) begin
@@ -106,7 +100,6 @@ module canfd_bits_tb;
                 end
 
                 useful_bits = useful_bits + 1;
-
             end
 
             if (run_length == 0 ||
@@ -116,9 +109,7 @@ module canfd_bits_tb;
                 run_length = run_length + 1;
 
             last_bit = dut.out_bit;
-
         end
-
     end
 
     task test_frame;
@@ -145,8 +136,6 @@ module canfd_bits_tb;
             data = test_data;
             dlc = test_dlc;
 
-            // Meme disposition des champs que
-            // l'implementation TX actuelle.
             expected_payload = {
                 1'b0,
                 test_id,
@@ -172,6 +161,7 @@ module canfd_bits_tb;
             monitor_enable = 1;
 
             start = 1;
+
             @(negedge clk);
             start = 0;
 
@@ -205,9 +195,7 @@ module canfd_bits_tb;
                 $display("FAIL : erreurs detectees");
 
             repeat (3) @(negedge clk);
-
         end
-
     endtask
 
     initial begin
@@ -255,4 +243,3 @@ module canfd_bits_tb;
     end
 
 endmodule
-

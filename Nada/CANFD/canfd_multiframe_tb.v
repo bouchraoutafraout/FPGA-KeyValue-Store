@@ -169,6 +169,7 @@ module canfd_multiframe_tb;
 
             // Seulement pour ID=0x123, DLC=2, DATA=A5C3
 
+            $display("CRC-17 calcule = %05h", dut.crc_final);
             if (check_crc) begin
 
                 if (dut.crc_final !== 17'h14E0A) begin
@@ -339,3 +340,4 @@ module canfd_multiframe_tb;
     end
 
 endmodule
+

@@ -4,20 +4,22 @@
 module canfd_tx #(
     parameter CLK_FREQ = 100_000_000
 )(
-    input wire clk,
-    input wire rst,
-    input wire start,
-    input wire [10:0] can_id,
-    input wire [63:0] data,
-    input wire [3:0] dlc,
-    output reg can_tx,
-    output reg busy,
-    output reg done
+    input  wire        clk,
+    input  wire        rst,
+    input  wire        start,
+
+    input  wire [10:0] can_id,
+    input  wire [63:0] data,
+    input  wire [3:0]  dlc,
+
+    output reg         can_tx,
+    output reg         busy,
+    output reg         done
 );
 
-    // ==============================
-    // ETATS DE LA MACHINE
-    // ==============================
+    // ==========================================
+    // 1. MACHINE A ETATS
+    // ==========================================
 
     localparam IDLE      = 3'd0;
     localparam PREP      = 3'd1;
@@ -30,11 +32,12 @@ module canfd_tx #(
 
     reg [2:0] state;
 
-    // ==============================
-    // REGISTRES DE TRANSMISSION
-    // ==============================
+    // ==========================================
+    // 2. REGISTRES DE TRANSMISSION
+    // ==========================================
 
     reg [85:0] payload;
+
     reg [6:0] total_bits;
     reg [6:0] bit_index;
 
@@ -48,9 +51,9 @@ module canfd_tx #(
     reg timer_run;
     wire tick;
 
-    // ==============================
-    // BIT TIMER
-    // ==============================
+    // ==========================================
+    // 3. BIT TIMER
+    // ==========================================
 
     canfd_bit_timer #(
         .CLK_FREQ(CLK_FREQ),
@@ -64,14 +67,15 @@ module canfd_tx #(
         .tick(tick)
     );
 
-    // ==============================
-    // DYNAMIC BIT STUFFING
-    // ==============================
+    // ==========================================
+    // 4. DYNAMIC BIT STUFFING
+    // ==========================================
 
     wire clear_stuff = (state == PREP);
 
     wire in_valid =
-        (state == SEND) && (bit_index < total_bits);
+        (state == SEND) &&
+        (bit_index < total_bits);
 
     wire in_bit = payload[85-bit_index];
 
@@ -79,6 +83,7 @@ module canfd_tx #(
     wire out_valid;
     wire out_bit;
     wire out_is_stuff;
+
     wire [7:0] stuff_count;
 
     canfd_stuffer stuffer (
@@ -86,18 +91,21 @@ module canfd_tx #(
         .rst(rst),
         .clear(clear_stuff),
         .tick(tick),
+
         .in_valid(in_valid),
         .in_bit(in_bit),
+
         .in_take(in_take),
         .out_valid(out_valid),
         .out_bit(out_bit),
         .out_is_stuff(out_is_stuff),
+
         .stuff_cnt(stuff_count)
     );
 
-    // ==============================
-    // CRC-17
-    // ==============================
+    // ==========================================
+    // 5. CRC-17
+    // ==========================================
 
     wire [16:0] crc_value;
 
@@ -105,7 +113,8 @@ module canfd_tx #(
 
     wire crc_en =
         out_valid &&
-        ((state == SEND) || (state == WAIT_LAST));
+        ((state == SEND) ||
+         (state == WAIT_LAST));
 
     canfd_crc #(
         .WIDTH(17),
@@ -120,9 +129,9 @@ module canfd_tx #(
         .crc(crc_value)
     );
 
-    // ==============================
-    // CRC FIELD
-    // ==============================
+    // ==========================================
+    // 6. CHAMP CRC
+    // ==========================================
 
     reg crc_load;
 
@@ -136,21 +145,26 @@ module canfd_tx #(
         .clk(clk),
         .rst(rst),
         .load(crc_load),
+
         .prev_bit(prev_final),
         .stuff_mod8(stuff_final[2:0]),
+
         .crc({4'd0, crc_final}),
         .is21(1'b0),
+
         .tick(tick),
+
         .out_valid(crc_valid),
         .out_bit(crc_bit),
         .out_is_fsb(crc_fsb),
+
         .done(crc_done),
         .active(crc_active)
     );
 
-    // ==============================
-    // MACHINE PRINCIPALE
-    // ==============================
+    // ==========================================
+    // 7. MACHINE PRINCIPALE
+    // ==========================================
 
     always @(posedge clk) begin
 
@@ -164,7 +178,7 @@ module canfd_tx #(
 
             crc_final <= 0;
             stuff_final <= 0;
-            prev_final <= 1;
+            prev_final <= 1'b1;
 
             tail_index <= 0;
             tail_valid <= 0;
@@ -172,50 +186,64 @@ module canfd_tx #(
             timer_run <= 0;
             crc_load <= 0;
 
-            can_tx <= 1;
+            can_tx <= 1'b1;
             busy <= 0;
             done <= 0;
 
         end else begin
 
-            done <= 0;
-            crc_load <= 0;
-            tail_valid <= 0;
+            done <= 1'b0;
+            crc_load <= 1'b0;
+            tail_valid <= 1'b0;
 
-            // Sortie du stuffer
+            // ==================================
+            // SORTIE DES BITS UTILES ET STUFFING
+            // ==================================
+
             if (out_valid &&
-                (state == SEND || state == WAIT_LAST))
+                ((state == SEND) ||
+                 (state == WAIT_LAST))) begin
+
                 can_tx <= out_bit;
 
-            // Sortie du champ CRC
-            if (crc_valid && state == CRC_SEND)
+            end
+
+            // ==================================
+            // SORTIE DU CHAMP CRC
+            // ==================================
+
+            if (crc_valid &&
+                state == CRC_SEND) begin
+
                 can_tx <= crc_bit;
+
+            end
 
             case (state)
 
-                // ----------------------
+                // ==============================
                 // IDLE
-                // ----------------------
+                // ==============================
 
                 IDLE: begin
 
-                    timer_run <= 0;
-                    can_tx <= 1;
-                    busy <= 0;
+                    timer_run <= 1'b0;
+                    can_tx <= 1'b1;
+                    busy <= 1'b0;
 
                     if (start) begin
 
                         payload <= {
                             1'b0,       // SOF
-                            can_id,     // ID 11 bits
+                            can_id,     // Identifiant
                             1'b1,       // RRS
                             1'b0,       // IDE
                             1'b1,       // FDF
                             1'b0,       // res
                             1'b0,       // BRS
                             1'b0,       // ESI
-                            dlc,        // DLC
-                            data        // DATA
+                            dlc,
+                            data
                         };
 
                         total_bits <=
@@ -224,30 +252,31 @@ module canfd_tx #(
                         bit_index <= 0;
                         tail_index <= 0;
 
-                        busy <= 1;
+                        busy <= 1'b1;
                         state <= PREP;
 
                     end
+
                 end
 
-                // ----------------------
+                // ==============================
                 // PREPARATION
-                // ----------------------
+                // ==============================
 
                 PREP: begin
 
-                    timer_run <= 0;
+                    timer_run <= 1'b0;
                     state <= SEND;
 
                 end
 
-                // ----------------------
-                // EN-TETE + DATA
-                // ----------------------
+                // ==============================
+                // ENVOI EN-TETE + DONNEES
+                // ==============================
 
                 SEND: begin
 
-                    timer_run <= 1;
+                    timer_run <= 1'b1;
 
                     if (in_take) begin
 
@@ -257,40 +286,59 @@ module canfd_tx #(
                             state <= WAIT_LAST;
 
                     end
+
                 end
 
-                // ----------------------
-                // DERNIER BIT
-                // ----------------------
+                // ==============================
+                // DERNIER BIT + STUFFING FINAL
+                // ==============================
 
                 WAIT_LAST: begin
 
                     if (out_valid) begin
 
-                        prev_final <= out_bit;
-                        stuff_final <= stuff_count;
+                        // Correction :
+                        // Si les 5 derniers bits emis
+                        // sont identiques, attendre
+                        // le bit de stuffing final.
 
-                        state <= CRC_LOAD;
+                        if (out_is_stuff ||
+                            (stuffer.run != 3'd5)) begin
+
+                            // Dernier bit reellement emis
+                            prev_final <= out_bit;
+
+                            // Nombre final de stuff bits
+                            stuff_final <= stuff_count;
+
+                            // Le CRC ne sera charge
+                            // qu'apres le dernier bit
+                            // de stuffing necessaire.
+                            state <= CRC_LOAD;
+
+                        end
 
                     end
+
                 end
 
-                // ----------------------
-                // CHARGEMENT CRC
-                // ----------------------
+                // ==============================
+                // CHARGEMENT DU CRC
+                // ==============================
 
                 CRC_LOAD: begin
 
                     crc_final <= crc_value;
-                    crc_load <= 1;
+
+                    crc_load <= 1'b1;
 
                     state <= CRC_SEND;
 
                 end
 
-                // ----------------------
-                // TRANSMISSION CRC
-                // ----------------------
+                // ==============================
+                // ENVOI DU CHAMP CRC
+                // ==============================
 
                 CRC_SEND: begin
 
@@ -300,12 +348,12 @@ module canfd_tx #(
                         state <= TAIL;
 
                     end
+
                 end
 
-                // ----------------------
+                // ==============================
                 // FIN DE TRAME
-                // CRC DELIMITER + ACK + EOF
-                // ----------------------
+                // ==============================
 
                 TAIL: begin
 
@@ -314,48 +362,58 @@ module canfd_tx #(
                         tail_valid <= 1'b1;
 
                         if (tail_index == 4'd9) begin
+
                             state <= FINISH;
+
                         end else begin
-                            tail_index <= tail_index + 1'b1;
+
+                            tail_index <=
+                                tail_index + 1'b1;
+
                         end
 
                     end
 
-                    // CORRECTION :
-                    // Meme latence enregistree
-                    // que la sortie du CRC
-                    if (tail_valid)
+                    // Mise a jour avec un cycle
+                    // de latence apres tail_valid,
+                    // comme dans la version testee.
+                    if (tail_valid) begin
+
                         can_tx <= 1'b1;
+
+                    end
 
                 end
 
-                // ----------------------
-                // FIN TRANSMISSION
-                // ----------------------
+                // ==============================
+                // TRANSMISSION TERMINEE
+                // ==============================
 
                 FINISH: begin
 
                     if (tick) begin
 
-                        timer_run <= 0;
-                        busy <= 0;
-                        done <= 1;
+                        timer_run <= 1'b0;
+                        busy <= 1'b0;
+                        done <= 1'b1;
 
                         state <= IDLE;
 
                     end
+
                 end
 
                 default: begin
 
                     state <= IDLE;
-                    timer_run <= 0;
+                    timer_run <= 1'b0;
 
                 end
 
             endcase
 
         end
+
     end
 
 endmodule
