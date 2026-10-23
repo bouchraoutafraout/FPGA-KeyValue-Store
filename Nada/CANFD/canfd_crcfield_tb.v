@@ -33,6 +33,9 @@ module canfd_crcfield_tb;
             got = 0; n_got = 0; n_fsb = 0;
             @(negedge clk); prev_bit = p; stuff_mod8 = sc; crc = c; is21 = w21; load = 1;
             @(negedge clk); load = 0; tick = 1;                     // un tick a chaque cycle
+            $display("DEBUG TB: p=%b sc=%0d is21=%b", p, sc, w21);
+$display("DEBUG DUT: len=%0d active=%b seq=%b fsb=%b",
+         dut.len, dut.active, dut.seq, dut.fsb);
             for (t = 0; t < exp_n + 6; t = t + 1) @(negedge clk);
             tick = 0; @(negedge clk);
             if (got === exp && n_got == exp_n && n_fsb == exp_fsb)

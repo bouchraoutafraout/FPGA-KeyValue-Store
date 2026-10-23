@@ -57,7 +57,7 @@ module canfd_crcfield (
     reg        prev;
     integer    i, n, nb;
 
-    always @* begin
+    always_comb begin
         sbc = sbc_code(stuff_mod8);
         nb  = is21 ? 25 : 21;
         fld = is21 ? {sbc, crc} : {4'b0000, sbc, crc[16:0]};
@@ -75,6 +75,7 @@ module canfd_crcfield (
             end
         end
         len_c = n;
+        
     end
 
     // ---- emission bit par bit ----
