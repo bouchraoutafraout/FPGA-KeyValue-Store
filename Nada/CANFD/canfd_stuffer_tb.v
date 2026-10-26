@@ -60,7 +60,7 @@ module canfd_stuffer_tb;
         // 6 zeros -> 00000 [1] 0
         run(64'b000000,       6,  128'b0100000,        7, 1, "6 zeros");
         // 10 uns -> 11111 [0] 11111 [0]
-        run(64'b1111111111,  10,  128'b011111011111,  12, 2, "10 uns");
+        run(64'b1111111111, 10, 128'b11111011111, 11, 1, "10 uns");
         // 0000011111 -> 00000 [1] 1111 [0] 1  (le bit de bourrage compte dans la serie suivante)
         run(64'b1111100000,  10,  128'b101111100000, 12, 2, "bourrage dans la serie suivante");
         // alternance : aucun bourrage
