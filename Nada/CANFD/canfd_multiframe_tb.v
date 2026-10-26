@@ -14,6 +14,17 @@ module canfd_multiframe_tb;
     wire can_tx;
     wire busy;
     wire done;
+    wire ack_error;
+
+    // Modele simplifie d'un recepteur CAN :
+    // acquittement dominant durant la fenetre ACK.
+    wire can_rx;
+
+    assign can_rx =
+        (dut.state == 4'd7 &&
+         (dut.tail_index == 4'd1 ||
+          dut.tail_index == 4'd2))
+        ? 1'b0 : can_tx;
 
     integer errors = 0;
     integer frames_ok = 0;
@@ -36,9 +47,11 @@ module canfd_multiframe_tb;
         .can_id(can_id),
         .data(data),
         .dlc(dlc),
+        .can_rx(can_rx),
         .can_tx(can_tx),
         .busy(busy),
-        .done(done)
+        .done(done),
+        .ack_error(ack_error)
     );
 
     // =====================================
@@ -90,7 +103,10 @@ module canfd_multiframe_tb;
             @(negedge clk);
             start = 1'b0;
 
-            // Verifier busy
+            // =====================================
+            // VERIFIER BUSY
+            // =====================================
+
             if (busy !== 1'b1) begin
 
                 $display("FAIL : busy absent au depart");
@@ -112,7 +128,6 @@ module canfd_multiframe_tb;
             start = 1'b1;
 
             @(negedge clk);
-
             start = 1'b0;
 
             // =====================================
@@ -167,15 +182,23 @@ module canfd_multiframe_tb;
             // VERIFICATION CRC DE REFERENCE
             // =====================================
 
-            // Seulement pour ID=0x123, DLC=2, DATA=A5C3
+            // Reference interne pour :
+            // ID = 0x123
+            // DLC = 2
+            // DATA = A5C3
+            //
+            // CRC apres traitement SBC = 0x1BBF9
+            // Valeur a confronter ensuite a un
+            // modele independant conforme CAN-FD.
 
             $display("CRC-17 calcule = %05h", dut.crc_final);
+
             if (check_crc) begin
 
-                if (dut.crc_final !== 17'h14E0A) begin
+                if (dut.crc_final !== 17'h1BBF9) begin
 
                     $display(
-                        "FAIL : CRC attendu 14E0A, obtenu %h",
+                        "FAIL : CRC attendu 1BBF9, obtenu %h",
                         dut.crc_final
                     );
 
@@ -184,9 +207,25 @@ module canfd_multiframe_tb;
                 end
                 else begin
 
-                    $display("PASS : CRC-17 = 14E0A");
+                    $display("PASS : CRC-17 = 1BBF9");
 
                 end
+
+            end
+
+            // =====================================
+            // VERIFICATION ACK
+            // =====================================
+
+            if (ack_error !== 1'b0) begin
+
+                $display("FAIL : ACK non recu");
+                errors = errors + 1;
+
+            end
+            else begin
+
+                $display("PASS : ACK recu");
 
             end
 
@@ -198,7 +237,7 @@ module canfd_multiframe_tb;
 
             @(negedge clk);
 
-            // Normalement une seule transmission terminee
+            // Verifier une seule transmission terminee
             if (done_count != start_done_count + 1) begin
 
                 $display(
@@ -340,4 +379,3 @@ module canfd_multiframe_tb;
     end
 
 endmodule
-
