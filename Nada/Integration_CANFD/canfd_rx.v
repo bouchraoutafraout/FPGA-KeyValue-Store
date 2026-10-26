@@ -204,9 +204,8 @@ end
                 if (payload_count >= 7'd19 && payload_count <= 7'd22)
                     rx_dlc <= {rx_dlc[2:0], payload_bit};
 
-                if (payload_count >= 7'd23 && payload_count <= 7'd38)
-                    rx_data <= {rx_data[62:0], payload_bit};
-
+                if (payload_count >= 7'd23 && payload_count <= PAYLOAD_BITS)
+                      rx_data <= {rx_data[62:0], payload_bit};
                 if (payload_count == PAYLOAD_BITS)
                     decode_done <= 1'b1;
             end
