@@ -1,4 +1,3 @@
-
 `timescale 1ns/1ps
 
 module canfd_tx #(
@@ -73,9 +72,11 @@ module canfd_tx #(
     wire clear_stuff = (state == PREP);
 
     wire in_valid =
-        (state == SEND) &&
-        (bit_index < total_bits);
-
+    ((state == SEND) &&
+     (bit_index < total_bits))
+    ||
+    ((state == WAIT_LAST) &&
+     stuffer.need_stuff);
     wire in_bit = payload[85-bit_index];
 
     wire in_take;
@@ -312,8 +313,10 @@ module canfd_tx #(
                 end
 
                 WAIT_LAST: begin
-                    if (out_valid) begin
-
+                    // Le dernier bit utile a deja ete accepte.
+                    // Si cinq bits identiques viennent d'etre emis,
+                    // attendre le stuffing final avant le champ CRC.
+                    if (out_valid && !stuffer.need_stuff) begin
                         prev_final <= out_bit;
                         stuff_final <= stuff_count;
 

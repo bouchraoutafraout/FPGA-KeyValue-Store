@@ -13,8 +13,8 @@ module canfd_wire_tb;
 
     reg [10:0] can_id = 11'h123;
 
-    // Test particulier : les 5 derniers bits
-    // du deuxieme octet sont 11111
+    // Test particulier :
+    // les 5 derniers bits utiles sont 11111
     reg [63:0] data = 64'hA51F000000000000;
 
     reg [3:0] dlc = 4'd2;
@@ -26,11 +26,11 @@ module canfd_wire_tb;
     integer file_out;
     integer bit_count = 0;
 
-    // Horloge 100 MHz : periode 10 ns
+    // Horloge 100 MHz : periode = 10 ns
     always #5 clk = ~clk;
 
     // ==========================================
-    // 2. MODULE CAN FD A TESTER
+    // 2. MODULE CAN-FD TX
     // ==========================================
 
     canfd_tx #(
@@ -42,9 +42,11 @@ module canfd_wire_tb;
         .can_id(can_id),
         .data(data),
         .dlc(dlc),
+        .can_rx(1'b1),
         .can_tx(can_tx),
         .busy(busy),
-        .done(done)
+        .done(done),
+        .ack_error()
     );
 
     // ==========================================
@@ -52,11 +54,16 @@ module canfd_wire_tb;
     // ==========================================
 
     // Echantillonnage 30 ns apres chaque tick
-    // pour tenir compte de la latence du TX actuel.
+    // afin d'observer can_tx apres sa mise a jour.
 
     always @(posedge dut.tick) begin
 
         #30;
+
+        $display(
+            "DEBUG WIRE : time=%0t busy=%b done=%b tx=%b state=%0d",
+            $time, busy, done, can_tx, dut.state
+        );
 
         if (busy) begin
 
@@ -75,7 +82,47 @@ module canfd_wire_tb;
     end
 
     // ==========================================
-    // 4. SCENARIO DE SIMULATION
+    // 4. DIAGNOSTIC FRONTIERE DONNEES / CRC
+    // ==========================================
+
+    // On affiche uniquement les evenements
+    // importants pour eviter des milliers de lignes.
+
+    always @(negedge clk) begin
+
+        if (!rst &&
+            (dut.state == 4'd2 ||
+             dut.state == 4'd3 ||
+             dut.state == 4'd4 ||
+             dut.state == 4'd5 ||
+             dut.state == 4'd6)) begin
+
+            if (dut.bit_index >= 7'd36 &&
+                dut.bit_index <= 7'd38 &&
+                (dut.out_valid ||
+                 dut.stuffer.need_stuff ||
+                 dut.state == 4'd4 ||
+                 dut.state == 4'd5)) begin
+
+                $display(
+                    "DEBUG FRONTIERE : state=%0d bit_index=%0d run=%0d need_stuff=%b out_valid=%b out_bit=%b stuff=%b",
+                    dut.state,
+                    dut.bit_index,
+                    dut.stuffer.run,
+                    dut.stuffer.need_stuff,
+                    dut.out_valid,
+                    dut.out_bit,
+                    dut.out_is_stuff
+                );
+
+            end
+
+        end
+
+    end
+
+    // ==========================================
+    // 5. SCENARIO DE SIMULATION
     // ==========================================
 
     initial begin
@@ -110,19 +157,19 @@ module canfd_wire_tb;
 
         repeat (3) @(negedge clk);
 
-        // Debut de transmission
+        // Demarrer la transmission
         start = 1'b1;
 
         @(negedge clk);
         start = 1'b0;
 
-        // Attendre la fin
+        // Attendre la fin de transmission
         wait(done == 1'b1);
 
         @(negedge clk);
 
         // ======================================
-        // 5. RESULTATS
+        // 6. AFFICHAGE DES RESULTATS
         // ======================================
 
         $display("--------------------------------");
@@ -161,7 +208,7 @@ module canfd_wire_tb;
     end
 
     // ==========================================
-    // 6. TIMEOUT DE SECURITE
+    // 7. TIMEOUT DE SECURITE
     // ==========================================
 
     initial begin
