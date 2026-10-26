@@ -14,6 +14,17 @@ module canfd_tx_tb;
     wire can_tx;
     wire busy;
     wire done;
+    wire ack_error;
+
+    // Simulation du bus CAN :
+    // Un recepteur acquitte pendant le ACK slot.
+    wire can_rx;
+
+    assign can_rx =
+    (dut.state == 4'd7 &&
+     (dut.tail_index == 4'd1 ||
+      dut.tail_index == 4'd2))
+    ? 1'b0 : can_tx;
 
     integer errors = 0;
     integer useful_bits = 0;
@@ -21,12 +32,16 @@ module canfd_tx_tb;
     integer crc_bits = 0;
     integer tail_bits = 0;
 
-    reg [16:0] expected_crc = 17'h14E0A;
+    // CRC attendu pour ce vecteur, apres traitement du SBC 0011
+    reg [16:0] expected_crc = 17'h1BBF9;
 
-    // Horloge 100 MHz : periode de 10 ns
+    // Horloge 100 MHz : periode 10 ns
     always #5 clk = ~clk;
 
-    // Module CAN FD a tester
+    // =====================================
+    // MODULE CAN FD TX
+    // =====================================
+
     canfd_tx #(
         .CLK_FREQ(100_000_000)
     ) dut (
@@ -36,13 +51,15 @@ module canfd_tx_tb;
         .can_id(can_id),
         .data(data),
         .dlc(dlc),
+        .can_rx(can_rx),
         .can_tx(can_tx),
         .busy(busy),
-        .done(done)
+        .done(done),
+        .ack_error(ack_error)
     );
 
     // =====================================
-    // COMPTEURS DU STUFFING ET DU CRC
+    // COMPTEURS STUFFING ET CRC
     // =====================================
 
     always @(negedge clk) begin
@@ -50,8 +67,8 @@ module canfd_tx_tb;
         if (!rst) begin
 
             if (dut.out_valid &&
-                (dut.state == 3'd2 ||
-                 dut.state == 3'd3)) begin
+                (dut.state == 4'd2 ||
+                 dut.state == 4'd3)) begin
 
                 if (dut.out_is_stuff)
                     dynamic_stuff = dynamic_stuff + 1;
@@ -60,25 +77,20 @@ module canfd_tx_tb;
 
             end
 
+            // CRC_SEND = 4'd6
             if (dut.crc_valid &&
-                dut.state == 3'd5) begin
+                dut.state == 4'd6) begin
 
                 crc_bits = crc_bits + 1;
 
             end
 
         end
-
     end
 
     // =====================================
     // VERIFICATION DE LA FIN DE TRAME
     // =====================================
-
-    // tail_valid est une impulsion enregistree.
-    // can_tx est mis a jour au front suivant.
-    // On attend ce front, puis 1 ns pour observer
-    // la nouvelle valeur de can_tx.
 
     always @(posedge clk) begin
 
@@ -107,7 +119,6 @@ module canfd_tx_tb;
             tail_bits = tail_bits + 1;
 
         end
-
     end
 
     // =====================================
@@ -119,7 +130,6 @@ module canfd_tx_tb;
         $dumpfile("canfd_tx.vcd");
         $dumpvars(0, canfd_tx_tb);
 
-        // Initialisation
         rst = 1;
         start = 0;
 
@@ -129,19 +139,19 @@ module canfd_tx_tb;
 
         repeat (3) @(negedge clk);
 
-        // Demarrage transmission
+        // Demarrage de la transmission
         start = 1;
 
         @(negedge clk);
         start = 0;
 
-        // Attendre fin de transmission
+        // Attendre la fin de la trame
         wait(done == 1'b1);
 
         @(negedge clk);
 
         // =====================================
-        // AFFICHAGE DES RESULTATS
+        // RESULTATS
         // =====================================
 
         $display("--------------------------------");
@@ -150,6 +160,7 @@ module canfd_tx_tb;
         $display("Bits CRC field    : %0d", crc_bits);
         $display("Bits fin de trame : %0d", tail_bits);
         $display("CRC-17            : %h", dut.crc_final);
+        $display("ACK error         : %b", ack_error);
         $display("--------------------------------");
 
         // Verification du nombre de bits utiles
@@ -176,10 +187,18 @@ module canfd_tx_tb;
             errors = errors + 1;
         end
 
-        // Verification CRC-17
+        // Verification du CRC-17
         if (dut.crc_final !== expected_crc) begin
             $display("FAIL : CRC-17 incorrect");
             errors = errors + 1;
+        end
+
+        // Verification de l'ACK
+        if (ack_error !== 1'b0) begin
+            $display("FAIL : ACK non recu");
+            errors = errors + 1;
+        end else begin
+            $display("PASS : ACK recu");
         end
 
         $display("--------------------------------");
@@ -206,4 +225,36 @@ module canfd_tx_tb;
 
     end
 
+    // Diagnostic du moment d'echantillonnage ACK
+    always @(negedge clk) begin
+        if (!rst &&
+            dut.ack_sampling &&
+            dut.ack_counter == dut.HALF_BIT_CLKS - 1) begin
+
+            $display(
+                "DEBUG ACK : can_rx=%b, can_rx_sync=%b, tail_index=%0d",
+                can_rx, dut.can_rx_sync, dut.tail_index
+            );
+        end
+    end
+always @(negedge clk) begin
+    if (!rst && dut.crc_en) begin
+        $display(
+            "DEBUG CRC : state=%0d | bit=%b | crc=%h",
+            dut.state,
+            dut.crc_din,
+            dut.crc_value
+        );
+    end
+end
+always @(negedge clk) begin
+    if (!rst && dut.state == 4'd4) begin
+        $display(
+            "DEBUG SBC : index=%0d | sbc=%b | bit=%b",
+            dut.sbc_index,
+            dut.sbc_final,
+            dut.crc_din
+        );
+    end
+end
 endmodule
