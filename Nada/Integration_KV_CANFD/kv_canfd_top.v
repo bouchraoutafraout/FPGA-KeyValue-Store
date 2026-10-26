@@ -40,7 +40,7 @@ module kv_canfd_top (
     wire sample_bit;
     wire sample_valid;
     wire rx_busy;
-    wire [6:0] bit_index;
+    wire [7:0] bit_index;
 
     wire payload_bit;
     wire payload_valid;
