@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module uart_tx_tb;
 
     reg clk = 0;
@@ -8,8 +9,8 @@ module uart_tx_tb;
 
     // Instance avec un baud rate rapide pour la simulation
     uart_tx #(
-        .CLK_FREQ(1000),
-        .BAUD_RATE(100)
+       .CLK_FREQ(200000000),
+       .BAUD_RATE(9600)
     ) uut (
         .clk(clk), .reset(reset),
         .start_tx(start_tx), .data_in(data_in),
@@ -17,7 +18,7 @@ module uart_tx_tb;
     );
 
     // Horloge
-    always #5 clk = ~clk;
+    always #2.5 clk = ~clk;
 
     initial begin
         $display("Debut simulation UART TX");

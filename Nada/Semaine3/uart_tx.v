@@ -10,9 +10,14 @@ module uart_tx #(
     output reg        busy            // 1 = transmission en cours
 );
 
-    localparam CLKS_PER_BIT = CLK_FREQ / BAUD_RATE;
+    
+    localparam integer CLKS_PER_BIT = CLK_FREQ / BAUD_RATE;
 
-    reg [12:0] clk_count = 0;
+    localparam integer COUNTER_WIDTH =
+              (CLKS_PER_BIT > 1) ? $clog2(CLKS_PER_BIT) : 1;
+
+    reg [COUNTER_WIDTH-1:0] clk_count = 0;
+
     reg [2:0]  bit_index = 0;
     reg [7:0]  data_reg  = 0;
 
@@ -26,6 +31,7 @@ module uart_tx #(
             busy      <= 0;
             clk_count <= 0;
             bit_index <= 0;
+            data_reg <= 0;
         end else begin
             case (state)
                 IDLE: begin
