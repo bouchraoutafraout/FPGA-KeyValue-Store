@@ -26,7 +26,9 @@ module kv_canfd_top (
     output wire        ck_busy,
     output wire        ck_done,
     output wire        ck_found,
-    output wire        ck_error
+    output wire ck_error,
+    output wire [63:0] blockchain_rx_data,
+    output wire [3:0] blockchain_rx_dlc
 );
 
     // ==========================================
@@ -198,5 +200,6 @@ module kv_canfd_top (
         .value_out(ck_value_out),
         .error(ck_error)
     );
-
+assign blockchain_rx_data = can_data;
+assign blockchain_rx_dlc = can_dlc;
 endmodule
