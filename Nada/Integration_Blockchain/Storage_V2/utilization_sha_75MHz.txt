@@ -1,0 +1,35 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2026 Advanced Micro Devices, Inc. All Rights Reserved.
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2026.1 (win64) Build 6511674 Tue Jun 16 11:02:23 MDT 2026
+| Date         : Wed Oct 28 21:44:07 2026
+| Host         : DESKTOP-EPND00E running 64-bit major release  (build 9200)
+| Command      : report_utilization -hierarchical -file C:/Users/nadush/Desktop/projet_blockchain/Nada/Integration_Blockchain/Storage_V2/utilization_sha_75MHz.txt
+| Design       : blockchain_controller_sha_storage_top
+| Device       : xc7a200tfbg676-2
+| Speed File   : -2
+| Design State : Synthesized
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Utilization Design Information
+
+Table of Contents
+-----------------
+1. Utilization by Hierarchy
+
+1. Utilization by Hierarchy
+---------------------------
+
++-------------------------------------------+-----------------------------------+------------+------------+---------+------+------+--------+--------+------------+
+|                  Instance                 |               Module              | Total LUTs | Logic LUTs | LUTRAMs | SRLs |  FFs | RAMB36 | RAMB18 | DSP Blocks |
++-------------------------------------------+-----------------------------------+------------+------------+---------+------+------+--------+--------+------------+
+| blockchain_controller_sha_storage_top     |                             (top) |       1800 |       1800 |       0 |    0 | 2930 |      8 |      1 |          0 |
+|   (blockchain_controller_sha_storage_top) |                             (top) |          0 |          0 |       0 |    0 |    0 |      0 |      0 |          0 |
+|   SHA_BOUCHRA                             |                       sha256_core |       1286 |       1286 |       0 |    0 | 1042 |      0 |      0 |          0 |
+|   SYSTEM                                  | blockchain_controller_storage_top |        514 |        514 |       0 |    0 | 1888 |      8 |      1 |          0 |
+|     CONTROLLER                            |                    blockchain_top |        290 |        290 |       0 |    0 | 1264 |      0 |      0 |          0 |
+|     STORAGE_ADAPTER                       |        blockchain_storage_adapter |        224 |        224 |       0 |    0 |  624 |      8 |      1 |          0 |
+|       (STORAGE_ADAPTER)                   |        blockchain_storage_adapter |          3 |          3 |       0 |    0 |  616 |      0 |      0 |          0 |
+|       STORAGE                             |                blockchain_storage |        221 |        221 |       0 |    0 |    8 |      8 |      1 |          0 |
++-------------------------------------------+-----------------------------------+------------+------------+---------+------+------+--------+--------+------------+
+
+

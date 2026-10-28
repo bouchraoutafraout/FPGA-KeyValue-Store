@@ -1,0 +1,1813 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2026 Advanced Micro Devices, Inc. All Rights Reserved.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2026.1 (win64) Build 6511674 Tue Jun 16 11:02:23 MDT 2026
+| Date         : Wed Oct 28 21:43:58 2026
+| Host         : DESKTOP-EPND00E running 64-bit major release  (build 9200)
+| Command      : report_timing_summary -report_unconstrained -max_paths 5 -file C:/Users/nadush/Desktop/projet_blockchain/Nada/Integration_Blockchain/Storage_V2/timing_sha_75MHz.txt
+| Design       : blockchain_controller_sha_storage_top
+| Device       : 7a200t-fbg676
+| Speed File   : -2  PRODUCTION 1.23 2018-06-13
+| Design State : Synthesized
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Summary Report
+
+------------------------------------------------------------------------------------------------
+| Timer Settings
+| --------------
+------------------------------------------------------------------------------------------------
+
+  Enable Multi Corner Analysis               :  Yes
+  Enable Pessimism Removal                   :  Yes
+  Pessimism Removal Resolution               :  Nearest Common Node
+  Enable Input Delay Default Clock           :  No
+  Enable Preset / Clear Arcs                 :  No
+  Disable Flight Delays                      :  No
+  Ignore I/O Paths                           :  No
+  Timing Early Launch at Borrowing Latches   :  No
+  Borrow Time for Max Delay Exceptions       :  Yes
+  Merge Timing Exceptions                    :  Yes
+  Inter-SLR Compensation                     :  Conservative
+
+  Corner  Analyze    Analyze    
+  Name    Max Paths  Min Paths  
+  ------  ---------  ---------  
+  Slow    Yes        Yes        
+  Fast    Yes        Yes        
+
+
+------------------------------------------------------------------------------------------------
+| Report Methodology
+| ------------------
+------------------------------------------------------------------------------------------------
+
+No report available as report_methodology has not been run prior. Run report_methodology on the current design for the summary of methodology violations.
+
+
+
+check_timing report
+
+Table of Contents
+-----------------
+1. checking no_clock (0)
+2. checking constant_clock (0)
+3. checking pulse_width_clock (0)
+4. checking unconstrained_internal_endpoints (0)
+5. checking no_input_delay (422)
+6. checking no_output_delay (1000)
+7. checking multiple_clock (0)
+8. checking generated_clocks (0)
+9. checking loops (0)
+10. checking partial_input_delay (0)
+11. checking partial_output_delay (0)
+12. checking latch_loops (0)
+
+1. checking no_clock (0)
+------------------------
+ There are 0 register/latch pins with no clock.
+
+
+2. checking constant_clock (0)
+------------------------------
+ There are 0 register/latch pins with constant_clock.
+
+
+3. checking pulse_width_clock (0)
+---------------------------------
+ There are 0 register/latch pins which need pulse_width check
+
+
+4. checking unconstrained_internal_endpoints (0)
+------------------------------------------------
+ There are 0 pins that are not constrained for maximum delay.
+
+ There are 0 pins that are not constrained for maximum delay due to constant clock.
+
+
+5. checking no_input_delay (422)
+--------------------------------
+ There are 422 input ports with no input delay specified. (HIGH)
+
+ There are 0 input ports with no input delay but user has a false path constraint.
+
+
+6. checking no_output_delay (1000)
+----------------------------------
+ There are 1000 ports with no output delay specified. (HIGH)
+
+ There are 0 ports with no output delay but user has a false path constraint
+
+ There are 0 ports with no output delay but with a timing clock defined on it or propagating through it
+
+
+7. checking multiple_clock (0)
+------------------------------
+ There are 0 register/latch pins with multiple clocks.
+
+
+8. checking generated_clocks (0)
+--------------------------------
+ There are 0 generated clocks that are not connected to a clock source.
+
+
+9. checking loops (0)
+---------------------
+ There are 0 combinational loops in the design.
+
+
+10. checking partial_input_delay (0)
+------------------------------------
+ There are 0 input ports with partial input delay specified.
+
+
+11. checking partial_output_delay (0)
+-------------------------------------
+ There are 0 ports with partial output delay specified.
+
+
+12. checking latch_loops (0)
+----------------------------
+ There are 0 combinational latch loops in the design through latch input
+
+
+
+------------------------------------------------------------------------------------------------
+| Design Timing Summary
+| ---------------------
+------------------------------------------------------------------------------------------------
+
+    WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints     WPWS(ns)     TPWS(ns)  TPWS Failing Endpoints  TPWS Total Endpoints  
+    -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
+      0.510        0.000                      0                 6489        0.134        0.000                      0                 6489        6.166        0.000                       0                  2949  
+
+
+All user specified timing constraints are met.
+
+
+------------------------------------------------------------------------------------------------
+| Clock Summary
+| -------------
+------------------------------------------------------------------------------------------------
+
+Clock     Waveform(ns)       Period(ns)      Frequency(MHz)
+-----     ------------       ----------      --------------
+clk_test  {0.000 6.667}      13.333          75.002          
+
+
+------------------------------------------------------------------------------------------------
+| Intra Clock Table
+| -----------------
+------------------------------------------------------------------------------------------------
+
+Clock             WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints     WPWS(ns)     TPWS(ns)  TPWS Failing Endpoints  TPWS Total Endpoints  
+-----             -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
+clk_test            0.510        0.000                      0                 6489        0.134        0.000                      0                 6489        6.166        0.000                       0                  2949  
+
+
+------------------------------------------------------------------------------------------------
+| Inter Clock Table
+| -----------------
+------------------------------------------------------------------------------------------------
+
+From Clock    To Clock          WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints  
+----------    --------          -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------  
+
+
+------------------------------------------------------------------------------------------------
+| Other Path Groups Table
+| -----------------------
+------------------------------------------------------------------------------------------------
+
+Path Group    From Clock    To Clock          WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints  
+----------    ----------    --------          -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------  
+
+
+------------------------------------------------------------------------------------------------
+| User Ignored Path Table
+| -----------------------
+------------------------------------------------------------------------------------------------
+
+Path Group    From Clock    To Clock    
+----------    ----------    --------    
+
+
+------------------------------------------------------------------------------------------------
+| Unconstrained Path Table
+| ------------------------
+------------------------------------------------------------------------------------------------
+
+Path Group    From Clock    To Clock    
+----------    ----------    --------    
+(none)        clk_test                    
+(none)                      clk_test      
+
+
+------------------------------------------------------------------------------------------------
+| Timing Details
+| --------------
+------------------------------------------------------------------------------------------------
+
+
+---------------------------------------------------------------------------------------------------
+From Clock:  clk_test
+  To Clock:  clk_test
+
+Setup :            0  Failing Endpoints,  Worst Slack        0.510ns,  Total Violation        0.000ns
+Hold  :            0  Failing Endpoints,  Worst Slack        0.134ns,  Total Violation        0.000ns
+PW    :            0  Failing Endpoints,  Worst Slack        6.166ns,  Total Violation        0.000ns
+---------------------------------------------------------------------------------------------------
+
+
+Max Delay Paths
+--------------------------------------------------------------------------------------
+Slack (MET) :             0.510ns  (required time - arrival time)
+  Source:                 SHA_BOUCHRA/words_reg[4][1]/C
+                            (rising edge-triggered cell FDRE clocked by clk_test  {rise@0.000ns fall@6.667ns period=13.333ns})
+  Destination:            SHA_BOUCHRA/hash_reg[254]/D
+                            (rising edge-triggered cell FDRE clocked by clk_test  {rise@0.000ns fall@6.667ns period=13.333ns})
+  Path Group:             clk_test
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            13.333ns  (clk_test rise@13.333ns - clk_test rise@0.000ns)
+  Data Path Delay:        12.715ns  (logic 5.540ns (43.571%)  route 7.175ns (56.429%))
+  Logic Levels:           21  (CARRY4=10 LUT3=2 LUT4=2 LUT5=3 LUT6=4)
+  Clock Path Skew:        -0.145ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    1.881ns = ( 15.214 - 13.333 ) 
+    Source Clock Delay      (SCD):    2.193ns
+    Clock Pessimism Removal (CPR):    0.167ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_test rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=0)                   0.000     0.000    clk
+                         IBUF (Prop_ibuf_I_O)         0.882     0.882 r  clk_IBUF_inst/O
+                         net (fo=1, unplaced)         0.646     1.528    clk_IBUF
+                         BUFG (Prop_bufg_I_O)         0.081     1.609 r  clk_IBUF_BUFG_inst/O
+                         net (fo=2948, unplaced)      0.584     2.193    SHA_BOUCHRA/clk_IBUF_BUFG
+                         FDRE                                         r  SHA_BOUCHRA/words_reg[4][1]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_fdre_C_Q)         0.379     2.572 r  SHA_BOUCHRA/words_reg[4][1]/Q
+                         net (fo=3, unplaced)         0.797     3.369    SHA_BOUCHRA/words_reg[4]_3[1]
+                         LUT6 (Prop_lut6_I0_O)        0.232     3.601 r  SHA_BOUCHRA/words[15][3]_i_28/O
+                         net (fo=2, unplaced)         0.593     4.194    SHA_BOUCHRA/words[15][3]_i_28_n_0
+                         LUT6 (Prop_lut6_I1_O)        0.105     4.299 r  SHA_BOUCHRA/words[15][3]_i_19/O
+                         net (fo=3, unplaced)         0.956     5.255    SHA_BOUCHRA/words__0[1]
+                         LUT5 (Prop_lut5_I0_O)        0.105     5.360 r  SHA_BOUCHRA/words[15][3]_i_12/O
+                         net (fo=2, unplaced)         0.593     5.953    SHA_BOUCHRA/words[15][3]_i_12_n_0
+                         LUT3 (Prop_lut3_I0_O)        0.105     6.058 r  SHA_BOUCHRA/words[15][3]_i_3/O
+                         net (fo=1, unplaced)         0.368     6.426    SHA_BOUCHRA/words[15][3]_i_3_n_0
+                         CARRY4 (Prop_carry4_DI[2]_CO[3])
+                                                      0.334     6.760 r  SHA_BOUCHRA/words_reg[15][3]_i_1/CO[3]
+                         net (fo=1, unplaced)         0.008     6.768    SHA_BOUCHRA/words_reg[15][3]_i_1_n_0
+                         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.277     7.045 r  SHA_BOUCHRA/words_reg[15][7]_i_1/O[3]
+                         net (fo=14, unplaced)        0.570     7.615    SHA_BOUCHRA/next_word[7]
+                         LUT4 (Prop_lut4_I1_O)        0.250     7.865 r  SHA_BOUCHRA/a[18]_i_43/O
+                         net (fo=2, unplaced)         0.358     8.223    SHA_BOUCHRA/wt[7]
+                         LUT3 (Prop_lut3_I1_O)        0.105     8.328 r  SHA_BOUCHRA/a[18]_i_35/O
+                         net (fo=2, unplaced)         0.358     8.686    SHA_BOUCHRA/a[18]_i_35_n_0
+                         LUT4 (Prop_lut4_I3_O)        0.105     8.791 r  SHA_BOUCHRA/a[18]_i_39/O
+                         net (fo=1, unplaced)         0.000     8.791    SHA_BOUCHRA/a[18]_i_39_n_0
+                         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.423     9.214 r  SHA_BOUCHRA/a_reg[18]_i_30/CO[3]
+                         net (fo=1, unplaced)         0.000     9.214    SHA_BOUCHRA/a_reg[18]_i_30_n_0
+                         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.277     9.491 r  SHA_BOUCHRA/a_reg[23]_i_30/O[3]
+                         net (fo=2, unplaced)         0.530    10.021    SHA_BOUCHRA/a_reg[23]_i_30_n_4
+                         LUT5 (Prop_lut5_I0_O)        0.250    10.271 r  SHA_BOUCHRA/a[23]_i_22/O
+                         net (fo=2, unplaced)         0.339    10.610    SHA_BOUCHRA/a[23]_i_22_n_0
+                         LUT6 (Prop_lut6_I0_O)        0.105    10.715 r  SHA_BOUCHRA/a[23]_i_26/O
+                         net (fo=1, unplaced)         0.000    10.715    SHA_BOUCHRA/a[23]_i_26_n_0
+                         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.423    11.138 r  SHA_BOUCHRA/a_reg[23]_i_14/CO[3]
+                         net (fo=1, unplaced)         0.000    11.138    SHA_BOUCHRA/a_reg[23]_i_14_n_0
+                         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.277    11.415 r  SHA_BOUCHRA/a_reg[26]_i_14/O[3]
+                         net (fo=3, unplaced)         0.537    11.952    SHA_BOUCHRA/a_reg[26]_i_14_n_4
+                         LUT5 (Prop_lut5_I4_O)        0.250    12.202 r  SHA_BOUCHRA/a[26]_i_5/O
+                         net (fo=2, unplaced)         0.339    12.541    SHA_BOUCHRA/a[26]_i_5_n_0
+                         LUT6 (Prop_lut6_I0_O)        0.105    12.646 r  SHA_BOUCHRA/a[26]_i_9/O
+                         net (fo=1, unplaced)         0.000    12.646    SHA_BOUCHRA/a[26]_i_9_n_0
+                         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.423    13.069 r  SHA_BOUCHRA/a_reg[26]_i_1/CO[3]
+                         net (fo=1, unplaced)         0.000    13.069    SHA_BOUCHRA/a_reg[26]_i_1_n_0
+                         CARRY4 (Prop_carry4_CI_O[0])
+                                                      0.189    13.258 r  SHA_BOUCHRA/a_reg[31]_i_1/O[0]
+                         net (fo=2, unplaced)         0.829    14.087    SHA_BOUCHRA/new_a[28]
+                         CARRY4 (Prop_carry4_S[3]_CO[3])
+                                                      0.552    14.639 r  SHA_BOUCHRA/hash_reg[252]_i_1/CO[3]
+                         net (fo=1, unplaced)         0.000    14.639    SHA_BOUCHRA/hash_reg[252]_i_1_n_0
+                         CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.269    14.908 r  SHA_BOUCHRA/hash_reg[255]_i_2/O[1]
+                         net (fo=1, unplaced)         0.000    14.908    SHA_BOUCHRA/hash0[30]
+                         FDRE                                         r  SHA_BOUCHRA/hash_reg[254]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_test rise edge)
+                                                     13.333    13.333 r  <hidden>
+                                                      0.000    13.333 r  clk
+                         net (fo=0)                   0.000    13.333    clk
+                         IBUF (Prop_ibuf_I_O)         0.751    14.084 r  clk_IBUF_inst/O
+                         net (fo=1, unplaced)         0.613    14.698    clk_IBUF
+                         BUFG (Prop_bufg_I_O)         0.077    14.775 r  clk_IBUF_BUFG_inst/O
+                         net (fo=2948, unplaced)      0.439    15.214    SHA_BOUCHRA/clk_IBUF_BUFG
+                         FDRE                                         r  SHA_BOUCHRA/hash_reg[254]/C
+                         clock pessimism              0.167    15.381    <hidden>
+                         clock uncertainty           -0.035    15.345    <hidden>
+                         FDRE (Setup_fdre_C_D)        0.072    15.417    SHA_BOUCHRA/hash_reg[254]
+  -------------------------------------------------------------------
+                         required time                         15.417    <hidden>
+                         arrival time                         -14.908    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.510    <hidden>
+
+Slack (MET) :             0.565ns  (required time - arrival time)
+  Source:                 SHA_BOUCHRA/words_reg[4][1]/C
+                            (rising edge-triggered cell FDRE clocked by clk_test  {rise@0.000ns fall@6.667ns period=13.333ns})
+  Destination:            SHA_BOUCHRA/hash_reg[255]/D
+                            (rising edge-triggered cell FDRE clocked by clk_test  {rise@0.000ns fall@6.667ns period=13.333ns})
+  Path Group:             clk_test
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            13.333ns  (clk_test rise@13.333ns - clk_test rise@0.000ns)
+  Data Path Delay:        12.660ns  (logic 5.485ns (43.325%)  route 7.175ns (56.675%))
+  Logic Levels:           21  (CARRY4=10 LUT3=2 LUT4=2 LUT5=3 LUT6=4)
+  Clock Path Skew:        -0.145ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    1.881ns = ( 15.214 - 13.333 ) 
+    Source Clock Delay      (SCD):    2.193ns
+    Clock Pessimism Removal (CPR):    0.167ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_test rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=0)                   0.000     0.000    clk
+                         IBUF (Prop_ibuf_I_O)         0.882     0.882 r  clk_IBUF_inst/O
+                         net (fo=1, unplaced)         0.646     1.528    clk_IBUF
+                         BUFG (Prop_bufg_I_O)         0.081     1.609 r  clk_IBUF_BUFG_inst/O
+                         net (fo=2948, unplaced)      0.584     2.193    SHA_BOUCHRA/clk_IBUF_BUFG
+                         FDRE                                         r  SHA_BOUCHRA/words_reg[4][1]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_fdre_C_Q)         0.379     2.572 r  SHA_BOUCHRA/words_reg[4][1]/Q
+                         net (fo=3, unplaced)         0.797     3.369    SHA_BOUCHRA/words_reg[4]_3[1]
+                         LUT6 (Prop_lut6_I0_O)        0.232     3.601 r  SHA_BOUCHRA/words[15][3]_i_28/O
+                         net (fo=2, unplaced)         0.593     4.194    SHA_BOUCHRA/words[15][3]_i_28_n_0
+                         LUT6 (Prop_lut6_I1_O)        0.105     4.299 r  SHA_BOUCHRA/words[15][3]_i_19/O
+                         net (fo=3, unplaced)         0.956     5.255    SHA_BOUCHRA/words__0[1]
+                         LUT5 (Prop_lut5_I0_O)        0.105     5.360 r  SHA_BOUCHRA/words[15][3]_i_12/O
+                         net (fo=2, unplaced)         0.593     5.953    SHA_BOUCHRA/words[15][3]_i_12_n_0
+                         LUT3 (Prop_lut3_I0_O)        0.105     6.058 r  SHA_BOUCHRA/words[15][3]_i_3/O
+                         net (fo=1, unplaced)         0.368     6.426    SHA_BOUCHRA/words[15][3]_i_3_n_0
+                         CARRY4 (Prop_carry4_DI[2]_CO[3])
+                                                      0.334     6.760 r  SHA_BOUCHRA/words_reg[15][3]_i_1/CO[3]
+                         net (fo=1, unplaced)         0.008     6.768    SHA_BOUCHRA/words_reg[15][3]_i_1_n_0
+                         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.277     7.045 r  SHA_BOUCHRA/words_reg[15][7]_i_1/O[3]
+                         net (fo=14, unplaced)        0.570     7.615    SHA_BOUCHRA/next_word[7]
+                         LUT4 (Prop_lut4_I1_O)        0.250     7.865 r  SHA_BOUCHRA/a[18]_i_43/O
+                         net (fo=2, unplaced)         0.358     8.223    SHA_BOUCHRA/wt[7]
+                         LUT3 (Prop_lut3_I1_O)        0.105     8.328 r  SHA_BOUCHRA/a[18]_i_35/O
+                         net (fo=2, unplaced)         0.358     8.686    SHA_BOUCHRA/a[18]_i_35_n_0
+                         LUT4 (Prop_lut4_I3_O)        0.105     8.791 r  SHA_BOUCHRA/a[18]_i_39/O
+                         net (fo=1, unplaced)         0.000     8.791    SHA_BOUCHRA/a[18]_i_39_n_0
+                         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.423     9.214 r  SHA_BOUCHRA/a_reg[18]_i_30/CO[3]
+                         net (fo=1, unplaced)         0.000     9.214    SHA_BOUCHRA/a_reg[18]_i_30_n_0
+                         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.277     9.491 r  SHA_BOUCHRA/a_reg[23]_i_30/O[3]
+                         net (fo=2, unplaced)         0.530    10.021    SHA_BOUCHRA/a_reg[23]_i_30_n_4
+                         LUT5 (Prop_lut5_I0_O)        0.250    10.271 r  SHA_BOUCHRA/a[23]_i_22/O
+                         net (fo=2, unplaced)         0.339    10.610    SHA_BOUCHRA/a[23]_i_22_n_0
+                         LUT6 (Prop_lut6_I0_O)        0.105    10.715 r  SHA_BOUCHRA/a[23]_i_26/O
+                         net (fo=1, unplaced)         0.000    10.715    SHA_BOUCHRA/a[23]_i_26_n_0
+                         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.423    11.138 r  SHA_BOUCHRA/a_reg[23]_i_14/CO[3]
+                         net (fo=1, unplaced)         0.000    11.138    SHA_BOUCHRA/a_reg[23]_i_14_n_0
+                         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.277    11.415 r  SHA_BOUCHRA/a_reg[26]_i_14/O[3]
+                         net (fo=3, unplaced)         0.537    11.952    SHA_BOUCHRA/a_reg[26]_i_14_n_4
+                         LUT5 (Prop_lut5_I4_O)        0.250    12.202 r  SHA_BOUCHRA/a[26]_i_5/O
+                         net (fo=2, unplaced)         0.339    12.541    SHA_BOUCHRA/a[26]_i_5_n_0
+                         LUT6 (Prop_lut6_I0_O)        0.105    12.646 r  SHA_BOUCHRA/a[26]_i_9/O
+                         net (fo=1, unplaced)         0.000    12.646    SHA_BOUCHRA/a[26]_i_9_n_0
+                         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.423    13.069 r  SHA_BOUCHRA/a_reg[26]_i_1/CO[3]
+                         net (fo=1, unplaced)         0.000    13.069    SHA_BOUCHRA/a_reg[26]_i_1_n_0
+                         CARRY4 (Prop_carry4_CI_O[0])
+                                                      0.189    13.258 r  SHA_BOUCHRA/a_reg[31]_i_1/O[0]
+                         net (fo=2, unplaced)         0.829    14.087    SHA_BOUCHRA/new_a[28]
+                         CARRY4 (Prop_carry4_S[3]_CO[3])
+                                                      0.552    14.639 r  SHA_BOUCHRA/hash_reg[252]_i_1/CO[3]
+                         net (fo=1, unplaced)         0.000    14.639    SHA_BOUCHRA/hash_reg[252]_i_1_n_0
+                         CARRY4 (Prop_carry4_CI_O[2])
+                                                      0.214    14.853 r  SHA_BOUCHRA/hash_reg[255]_i_2/O[2]
+                         net (fo=1, unplaced)         0.000    14.853    SHA_BOUCHRA/hash0[31]
+                         FDRE                                         r  SHA_BOUCHRA/hash_reg[255]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_test rise edge)
+                                                     13.333    13.333 r  <hidden>
+                                                      0.000    13.333 r  clk
+                         net (fo=0)                   0.000    13.333    clk
+                         IBUF (Prop_ibuf_I_O)         0.751    14.084 r  clk_IBUF_inst/O
+                         net (fo=1, unplaced)         0.613    14.698    clk_IBUF
+                         BUFG (Prop_bufg_I_O)         0.077    14.775 r  clk_IBUF_BUFG_inst/O
+                         net (fo=2948, unplaced)      0.439    15.214    SHA_BOUCHRA/clk_IBUF_BUFG
+                         FDRE                                         r  SHA_BOUCHRA/hash_reg[255]/C
+                         clock pessimism              0.167    15.381    <hidden>
+                         clock uncertainty           -0.035    15.345    <hidden>
+                         FDRE (Setup_fdre_C_D)        0.072    15.417    SHA_BOUCHRA/hash_reg[255]
+  -------------------------------------------------------------------
+                         required time                         15.417    <hidden>
+                         arrival time                         -14.853    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.565    <hidden>
+
+Slack (MET) :             0.590ns  (required time - arrival time)
+  Source:                 SHA_BOUCHRA/words_reg[4][1]/C
+                            (rising edge-triggered cell FDRE clocked by clk_test  {rise@0.000ns fall@6.667ns period=13.333ns})
+  Destination:            SHA_BOUCHRA/hash_reg[253]/D
+                            (rising edge-triggered cell FDRE clocked by clk_test  {rise@0.000ns fall@6.667ns period=13.333ns})
+  Path Group:             clk_test
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            13.333ns  (clk_test rise@13.333ns - clk_test rise@0.000ns)
+  Data Path Delay:        12.635ns  (logic 5.460ns (43.213%)  route 7.175ns (56.787%))
+  Logic Levels:           21  (CARRY4=10 LUT3=2 LUT4=2 LUT5=3 LUT6=4)
+  Clock Path Skew:        -0.145ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    1.881ns = ( 15.214 - 13.333 ) 
+    Source Clock Delay      (SCD):    2.193ns
+    Clock Pessimism Removal (CPR):    0.167ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_test rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=0)                   0.000     0.000    clk
+                         IBUF (Prop_ibuf_I_O)         0.882     0.882 r  clk_IBUF_inst/O
+                         net (fo=1, unplaced)         0.646     1.528    clk_IBUF
+                         BUFG (Prop_bufg_I_O)         0.081     1.609 r  clk_IBUF_BUFG_inst/O
+                         net (fo=2948, unplaced)      0.584     2.193    SHA_BOUCHRA/clk_IBUF_BUFG
+                         FDRE                                         r  SHA_BOUCHRA/words_reg[4][1]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_fdre_C_Q)         0.379     2.572 r  SHA_BOUCHRA/words_reg[4][1]/Q
+                         net (fo=3, unplaced)         0.797     3.369    SHA_BOUCHRA/words_reg[4]_3[1]
+                         LUT6 (Prop_lut6_I0_O)        0.232     3.601 r  SHA_BOUCHRA/words[15][3]_i_28/O
+                         net (fo=2, unplaced)         0.593     4.194    SHA_BOUCHRA/words[15][3]_i_28_n_0
+                         LUT6 (Prop_lut6_I1_O)        0.105     4.299 r  SHA_BOUCHRA/words[15][3]_i_19/O
+                         net (fo=3, unplaced)         0.956     5.255    SHA_BOUCHRA/words__0[1]
+                         LUT5 (Prop_lut5_I0_O)        0.105     5.360 r  SHA_BOUCHRA/words[15][3]_i_12/O
+                         net (fo=2, unplaced)         0.593     5.953    SHA_BOUCHRA/words[15][3]_i_12_n_0
+                         LUT3 (Prop_lut3_I0_O)        0.105     6.058 r  SHA_BOUCHRA/words[15][3]_i_3/O
+                         net (fo=1, unplaced)         0.368     6.426    SHA_BOUCHRA/words[15][3]_i_3_n_0
+                         CARRY4 (Prop_carry4_DI[2]_CO[3])
+                                                      0.334     6.760 r  SHA_BOUCHRA/words_reg[15][3]_i_1/CO[3]
+                         net (fo=1, unplaced)         0.008     6.768    SHA_BOUCHRA/words_reg[15][3]_i_1_n_0
+                         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.277     7.045 r  SHA_BOUCHRA/words_reg[15][7]_i_1/O[3]
+                         net (fo=14, unplaced)        0.570     7.615    SHA_BOUCHRA/next_word[7]
+                         LUT4 (Prop_lut4_I1_O)        0.250     7.865 r  SHA_BOUCHRA/a[18]_i_43/O
+                         net (fo=2, unplaced)         0.358     8.223    SHA_BOUCHRA/wt[7]
+                         LUT3 (Prop_lut3_I1_O)        0.105     8.328 r  SHA_BOUCHRA/a[18]_i_35/O
+                         net (fo=2, unplaced)         0.358     8.686    SHA_BOUCHRA/a[18]_i_35_n_0
+                         LUT4 (Prop_lut4_I3_O)        0.105     8.791 r  SHA_BOUCHRA/a[18]_i_39/O
+                         net (fo=1, unplaced)         0.000     8.791    SHA_BOUCHRA/a[18]_i_39_n_0
+                         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.423     9.214 r  SHA_BOUCHRA/a_reg[18]_i_30/CO[3]
+                         net (fo=1, unplaced)         0.000     9.214    SHA_BOUCHRA/a_reg[18]_i_30_n_0
+                         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.277     9.491 r  SHA_BOUCHRA/a_reg[23]_i_30/O[3]
+                         net (fo=2, unplaced)         0.530    10.021    SHA_BOUCHRA/a_reg[23]_i_30_n_4
+                         LUT5 (Prop_lut5_I0_O)        0.250    10.271 r  SHA_BOUCHRA/a[23]_i_22/O
+                         net (fo=2, unplaced)         0.339    10.610    SHA_BOUCHRA/a[23]_i_22_n_0
+                         LUT6 (Prop_lut6_I0_O)        0.105    10.715 r  SHA_BOUCHRA/a[23]_i_26/O
+                         net (fo=1, unplaced)         0.000    10.715    SHA_BOUCHRA/a[23]_i_26_n_0
+                         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.423    11.138 r  SHA_BOUCHRA/a_reg[23]_i_14/CO[3]
+                         net (fo=1, unplaced)         0.000    11.138    SHA_BOUCHRA/a_reg[23]_i_14_n_0
+                         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.277    11.415 r  SHA_BOUCHRA/a_reg[26]_i_14/O[3]
+                         net (fo=3, unplaced)         0.537    11.952    SHA_BOUCHRA/a_reg[26]_i_14_n_4
+                         LUT5 (Prop_lut5_I4_O)        0.250    12.202 r  SHA_BOUCHRA/a[26]_i_5/O
+                         net (fo=2, unplaced)         0.339    12.541    SHA_BOUCHRA/a[26]_i_5_n_0
+                         LUT6 (Prop_lut6_I0_O)        0.105    12.646 r  SHA_BOUCHRA/a[26]_i_9/O
+                         net (fo=1, unplaced)         0.000    12.646    SHA_BOUCHRA/a[26]_i_9_n_0
+                         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.423    13.069 r  SHA_BOUCHRA/a_reg[26]_i_1/CO[3]
+                         net (fo=1, unplaced)         0.000    13.069    SHA_BOUCHRA/a_reg[26]_i_1_n_0
+                         CARRY4 (Prop_carry4_CI_O[0])
+                                                      0.189    13.258 r  SHA_BOUCHRA/a_reg[31]_i_1/O[0]
+                         net (fo=2, unplaced)         0.829    14.087    SHA_BOUCHRA/new_a[28]
+                         CARRY4 (Prop_carry4_S[3]_CO[3])
+                                                      0.552    14.639 r  SHA_BOUCHRA/hash_reg[252]_i_1/CO[3]
+                         net (fo=1, unplaced)         0.000    14.639    SHA_BOUCHRA/hash_reg[252]_i_1_n_0
+                         CARRY4 (Prop_carry4_CI_O[0])
+                                                      0.189    14.828 r  SHA_BOUCHRA/hash_reg[255]_i_2/O[0]
+                         net (fo=1, unplaced)         0.000    14.828    SHA_BOUCHRA/hash0[29]
+                         FDRE                                         r  SHA_BOUCHRA/hash_reg[253]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_test rise edge)
+                                                     13.333    13.333 r  <hidden>
+                                                      0.000    13.333 r  clk
+                         net (fo=0)                   0.000    13.333    clk
+                         IBUF (Prop_ibuf_I_O)         0.751    14.084 r  clk_IBUF_inst/O
+                         net (fo=1, unplaced)         0.613    14.698    clk_IBUF
+                         BUFG (Prop_bufg_I_O)         0.077    14.775 r  clk_IBUF_BUFG_inst/O
+                         net (fo=2948, unplaced)      0.439    15.214    SHA_BOUCHRA/clk_IBUF_BUFG
+                         FDRE                                         r  SHA_BOUCHRA/hash_reg[253]/C
+                         clock pessimism              0.167    15.381    <hidden>
+                         clock uncertainty           -0.035    15.345    <hidden>
+                         FDRE (Setup_fdre_C_D)        0.072    15.417    SHA_BOUCHRA/hash_reg[253]
+  -------------------------------------------------------------------
+                         required time                         15.417    <hidden>
+                         arrival time                         -14.828    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.590    <hidden>
+
+Slack (MET) :             0.697ns  (required time - arrival time)
+  Source:                 SHA_BOUCHRA/words_reg[4][1]/C
+                            (rising edge-triggered cell FDRE clocked by clk_test  {rise@0.000ns fall@6.667ns period=13.333ns})
+  Destination:            SHA_BOUCHRA/hash_reg[252]/D
+                            (rising edge-triggered cell FDRE clocked by clk_test  {rise@0.000ns fall@6.667ns period=13.333ns})
+  Path Group:             clk_test
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            13.333ns  (clk_test rise@13.333ns - clk_test rise@0.000ns)
+  Data Path Delay:        12.528ns  (logic 5.353ns (42.728%)  route 7.175ns (57.272%))
+  Logic Levels:           20  (CARRY4=9 LUT3=2 LUT4=2 LUT5=3 LUT6=4)
+  Clock Path Skew:        -0.145ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    1.881ns = ( 15.214 - 13.333 ) 
+    Source Clock Delay      (SCD):    2.193ns
+    Clock Pessimism Removal (CPR):    0.167ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_test rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=0)                   0.000     0.000    clk
+                         IBUF (Prop_ibuf_I_O)         0.882     0.882 r  clk_IBUF_inst/O
+                         net (fo=1, unplaced)         0.646     1.528    clk_IBUF
+                         BUFG (Prop_bufg_I_O)         0.081     1.609 r  clk_IBUF_BUFG_inst/O
+                         net (fo=2948, unplaced)      0.584     2.193    SHA_BOUCHRA/clk_IBUF_BUFG
+                         FDRE                                         r  SHA_BOUCHRA/words_reg[4][1]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_fdre_C_Q)         0.379     2.572 r  SHA_BOUCHRA/words_reg[4][1]/Q
+                         net (fo=3, unplaced)         0.797     3.369    SHA_BOUCHRA/words_reg[4]_3[1]
+                         LUT6 (Prop_lut6_I0_O)        0.232     3.601 r  SHA_BOUCHRA/words[15][3]_i_28/O
+                         net (fo=2, unplaced)         0.593     4.194    SHA_BOUCHRA/words[15][3]_i_28_n_0
+                         LUT6 (Prop_lut6_I1_O)        0.105     4.299 r  SHA_BOUCHRA/words[15][3]_i_19/O
+                         net (fo=3, unplaced)         0.956     5.255    SHA_BOUCHRA/words__0[1]
+                         LUT5 (Prop_lut5_I0_O)        0.105     5.360 r  SHA_BOUCHRA/words[15][3]_i_12/O
+                         net (fo=2, unplaced)         0.593     5.953    SHA_BOUCHRA/words[15][3]_i_12_n_0
+                         LUT3 (Prop_lut3_I0_O)        0.105     6.058 r  SHA_BOUCHRA/words[15][3]_i_3/O
+                         net (fo=1, unplaced)         0.368     6.426    SHA_BOUCHRA/words[15][3]_i_3_n_0
+                         CARRY4 (Prop_carry4_DI[2]_CO[3])
+                                                      0.334     6.760 r  SHA_BOUCHRA/words_reg[15][3]_i_1/CO[3]
+                         net (fo=1, unplaced)         0.008     6.768    SHA_BOUCHRA/words_reg[15][3]_i_1_n_0
+                         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.277     7.045 r  SHA_BOUCHRA/words_reg[15][7]_i_1/O[3]
+                         net (fo=14, unplaced)        0.570     7.615    SHA_BOUCHRA/next_word[7]
+                         LUT4 (Prop_lut4_I1_O)        0.250     7.865 r  SHA_BOUCHRA/a[18]_i_43/O
+                         net (fo=2, unplaced)         0.358     8.223    SHA_BOUCHRA/wt[7]
+                         LUT3 (Prop_lut3_I1_O)        0.105     8.328 r  SHA_BOUCHRA/a[18]_i_35/O
+                         net (fo=2, unplaced)         0.358     8.686    SHA_BOUCHRA/a[18]_i_35_n_0
+                         LUT4 (Prop_lut4_I3_O)        0.105     8.791 r  SHA_BOUCHRA/a[18]_i_39/O
+                         net (fo=1, unplaced)         0.000     8.791    SHA_BOUCHRA/a[18]_i_39_n_0
+                         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.423     9.214 r  SHA_BOUCHRA/a_reg[18]_i_30/CO[3]
+                         net (fo=1, unplaced)         0.000     9.214    SHA_BOUCHRA/a_reg[18]_i_30_n_0
+                         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.277     9.491 r  SHA_BOUCHRA/a_reg[23]_i_30/O[3]
+                         net (fo=2, unplaced)         0.530    10.021    SHA_BOUCHRA/a_reg[23]_i_30_n_4
+                         LUT5 (Prop_lut5_I0_O)        0.250    10.271 r  SHA_BOUCHRA/a[23]_i_22/O
+                         net (fo=2, unplaced)         0.339    10.610    SHA_BOUCHRA/a[23]_i_22_n_0
+                         LUT6 (Prop_lut6_I0_O)        0.105    10.715 r  SHA_BOUCHRA/a[23]_i_26/O
+                         net (fo=1, unplaced)         0.000    10.715    SHA_BOUCHRA/a[23]_i_26_n_0
+                         CARRY4 (Prop_carry4_S[0]_O[3])
+                                                      0.505    11.220 r  SHA_BOUCHRA/a_reg[23]_i_14/O[3]
+                         net (fo=3, unplaced)         0.537    11.757    SHA_BOUCHRA/a_reg[23]_i_14_n_4
+                         LUT5 (Prop_lut5_I4_O)        0.250    12.007 r  SHA_BOUCHRA/a[23]_i_5/O
+                         net (fo=2, unplaced)         0.339    12.346    SHA_BOUCHRA/a[23]_i_5_n_0
+                         LUT6 (Prop_lut6_I0_O)        0.105    12.451 r  SHA_BOUCHRA/a[23]_i_9/O
+                         net (fo=1, unplaced)         0.000    12.451    SHA_BOUCHRA/a[23]_i_9_n_0
+                         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.423    12.874 r  SHA_BOUCHRA/a_reg[23]_i_1/CO[3]
+                         net (fo=1, unplaced)         0.000    12.874    SHA_BOUCHRA/a_reg[23]_i_1_n_0
+                         CARRY4 (Prop_carry4_CI_O[0])
+                                                      0.189    13.063 r  SHA_BOUCHRA/a_reg[26]_i_1/O[0]
+                         net (fo=2, unplaced)         0.829    13.892    SHA_BOUCHRA/new_a[24]
+                         CARRY4 (Prop_carry4_S[3]_CO[3])
+                                                      0.552    14.444 r  SHA_BOUCHRA/hash_reg[248]_i_1/CO[3]
+                         net (fo=1, unplaced)         0.000    14.444    SHA_BOUCHRA/hash_reg[248]_i_1_n_0
+                         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.277    14.721 r  SHA_BOUCHRA/hash_reg[252]_i_1/O[3]
+                         net (fo=1, unplaced)         0.000    14.721    SHA_BOUCHRA/hash0[28]
+                         FDRE                                         r  SHA_BOUCHRA/hash_reg[252]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_test rise edge)
+                                                     13.333    13.333 r  <hidden>
+                                                      0.000    13.333 r  clk
+                         net (fo=0)                   0.000    13.333    clk
+                         IBUF (Prop_ibuf_I_O)         0.751    14.084 r  clk_IBUF_inst/O
+                         net (fo=1, unplaced)         0.613    14.698    clk_IBUF
+                         BUFG (Prop_bufg_I_O)         0.077    14.775 r  clk_IBUF_BUFG_inst/O
+                         net (fo=2948, unplaced)      0.439    15.214    SHA_BOUCHRA/clk_IBUF_BUFG
+                         FDRE                                         r  SHA_BOUCHRA/hash_reg[252]/C
+                         clock pessimism              0.167    15.381    <hidden>
+                         clock uncertainty           -0.035    15.345    <hidden>
+                         FDRE (Setup_fdre_C_D)        0.072    15.417    SHA_BOUCHRA/hash_reg[252]
+  -------------------------------------------------------------------
+                         required time                         15.417    <hidden>
+                         arrival time                         -14.721    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.697    <hidden>
+
+Slack (MET) :             0.705ns  (required time - arrival time)
+  Source:                 SHA_BOUCHRA/words_reg[4][1]/C
+                            (rising edge-triggered cell FDRE clocked by clk_test  {rise@0.000ns fall@6.667ns period=13.333ns})
+  Destination:            SHA_BOUCHRA/hash_reg[250]/D
+                            (rising edge-triggered cell FDRE clocked by clk_test  {rise@0.000ns fall@6.667ns period=13.333ns})
+  Path Group:             clk_test
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            13.333ns  (clk_test rise@13.333ns - clk_test rise@0.000ns)
+  Data Path Delay:        12.520ns  (logic 5.345ns (42.692%)  route 7.175ns (57.308%))
+  Logic Levels:           20  (CARRY4=9 LUT3=2 LUT4=2 LUT5=3 LUT6=4)
+  Clock Path Skew:        -0.145ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    1.881ns = ( 15.214 - 13.333 ) 
+    Source Clock Delay      (SCD):    2.193ns
+    Clock Pessimism Removal (CPR):    0.167ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_test rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=0)                   0.000     0.000    clk
+                         IBUF (Prop_ibuf_I_O)         0.882     0.882 r  clk_IBUF_inst/O
+                         net (fo=1, unplaced)         0.646     1.528    clk_IBUF
+                         BUFG (Prop_bufg_I_O)         0.081     1.609 r  clk_IBUF_BUFG_inst/O
+                         net (fo=2948, unplaced)      0.584     2.193    SHA_BOUCHRA/clk_IBUF_BUFG
+                         FDRE                                         r  SHA_BOUCHRA/words_reg[4][1]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_fdre_C_Q)         0.379     2.572 r  SHA_BOUCHRA/words_reg[4][1]/Q
+                         net (fo=3, unplaced)         0.797     3.369    SHA_BOUCHRA/words_reg[4]_3[1]
+                         LUT6 (Prop_lut6_I0_O)        0.232     3.601 r  SHA_BOUCHRA/words[15][3]_i_28/O
+                         net (fo=2, unplaced)         0.593     4.194    SHA_BOUCHRA/words[15][3]_i_28_n_0
+                         LUT6 (Prop_lut6_I1_O)        0.105     4.299 r  SHA_BOUCHRA/words[15][3]_i_19/O
+                         net (fo=3, unplaced)         0.956     5.255    SHA_BOUCHRA/words__0[1]
+                         LUT5 (Prop_lut5_I0_O)        0.105     5.360 r  SHA_BOUCHRA/words[15][3]_i_12/O
+                         net (fo=2, unplaced)         0.593     5.953    SHA_BOUCHRA/words[15][3]_i_12_n_0
+                         LUT3 (Prop_lut3_I0_O)        0.105     6.058 r  SHA_BOUCHRA/words[15][3]_i_3/O
+                         net (fo=1, unplaced)         0.368     6.426    SHA_BOUCHRA/words[15][3]_i_3_n_0
+                         CARRY4 (Prop_carry4_DI[2]_CO[3])
+                                                      0.334     6.760 r  SHA_BOUCHRA/words_reg[15][3]_i_1/CO[3]
+                         net (fo=1, unplaced)         0.008     6.768    SHA_BOUCHRA/words_reg[15][3]_i_1_n_0
+                         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.277     7.045 r  SHA_BOUCHRA/words_reg[15][7]_i_1/O[3]
+                         net (fo=14, unplaced)        0.570     7.615    SHA_BOUCHRA/next_word[7]
+                         LUT4 (Prop_lut4_I1_O)        0.250     7.865 r  SHA_BOUCHRA/a[18]_i_43/O
+                         net (fo=2, unplaced)         0.358     8.223    SHA_BOUCHRA/wt[7]
+                         LUT3 (Prop_lut3_I1_O)        0.105     8.328 r  SHA_BOUCHRA/a[18]_i_35/O
+                         net (fo=2, unplaced)         0.358     8.686    SHA_BOUCHRA/a[18]_i_35_n_0
+                         LUT4 (Prop_lut4_I3_O)        0.105     8.791 r  SHA_BOUCHRA/a[18]_i_39/O
+                         net (fo=1, unplaced)         0.000     8.791    SHA_BOUCHRA/a[18]_i_39_n_0
+                         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.423     9.214 r  SHA_BOUCHRA/a_reg[18]_i_30/CO[3]
+                         net (fo=1, unplaced)         0.000     9.214    SHA_BOUCHRA/a_reg[18]_i_30_n_0
+                         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.277     9.491 r  SHA_BOUCHRA/a_reg[23]_i_30/O[3]
+                         net (fo=2, unplaced)         0.530    10.021    SHA_BOUCHRA/a_reg[23]_i_30_n_4
+                         LUT5 (Prop_lut5_I0_O)        0.250    10.271 r  SHA_BOUCHRA/a[23]_i_22/O
+                         net (fo=2, unplaced)         0.339    10.610    SHA_BOUCHRA/a[23]_i_22_n_0
+                         LUT6 (Prop_lut6_I0_O)        0.105    10.715 r  SHA_BOUCHRA/a[23]_i_26/O
+                         net (fo=1, unplaced)         0.000    10.715    SHA_BOUCHRA/a[23]_i_26_n_0
+                         CARRY4 (Prop_carry4_S[0]_O[3])
+                                                      0.505    11.220 r  SHA_BOUCHRA/a_reg[23]_i_14/O[3]
+                         net (fo=3, unplaced)         0.537    11.757    SHA_BOUCHRA/a_reg[23]_i_14_n_4
+                         LUT5 (Prop_lut5_I4_O)        0.250    12.007 r  SHA_BOUCHRA/a[23]_i_5/O
+                         net (fo=2, unplaced)         0.339    12.346    SHA_BOUCHRA/a[23]_i_5_n_0
+                         LUT6 (Prop_lut6_I0_O)        0.105    12.451 r  SHA_BOUCHRA/a[23]_i_9/O
+                         net (fo=1, unplaced)         0.000    12.451    SHA_BOUCHRA/a[23]_i_9_n_0
+                         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.423    12.874 r  SHA_BOUCHRA/a_reg[23]_i_1/CO[3]
+                         net (fo=1, unplaced)         0.000    12.874    SHA_BOUCHRA/a_reg[23]_i_1_n_0
+                         CARRY4 (Prop_carry4_CI_O[0])
+                                                      0.189    13.063 r  SHA_BOUCHRA/a_reg[26]_i_1/O[0]
+                         net (fo=2, unplaced)         0.829    13.892    SHA_BOUCHRA/new_a[24]
+                         CARRY4 (Prop_carry4_S[3]_CO[3])
+                                                      0.552    14.444 r  SHA_BOUCHRA/hash_reg[248]_i_1/CO[3]
+                         net (fo=1, unplaced)         0.000    14.444    SHA_BOUCHRA/hash_reg[248]_i_1_n_0
+                         CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.269    14.713 r  SHA_BOUCHRA/hash_reg[252]_i_1/O[1]
+                         net (fo=1, unplaced)         0.000    14.713    SHA_BOUCHRA/hash0[26]
+                         FDRE                                         r  SHA_BOUCHRA/hash_reg[250]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_test rise edge)
+                                                     13.333    13.333 r  <hidden>
+                                                      0.000    13.333 r  clk
+                         net (fo=0)                   0.000    13.333    clk
+                         IBUF (Prop_ibuf_I_O)         0.751    14.084 r  clk_IBUF_inst/O
+                         net (fo=1, unplaced)         0.613    14.698    clk_IBUF
+                         BUFG (Prop_bufg_I_O)         0.077    14.775 r  clk_IBUF_BUFG_inst/O
+                         net (fo=2948, unplaced)      0.439    15.214    SHA_BOUCHRA/clk_IBUF_BUFG
+                         FDRE                                         r  SHA_BOUCHRA/hash_reg[250]/C
+                         clock pessimism              0.167    15.381    <hidden>
+                         clock uncertainty           -0.035    15.345    <hidden>
+                         FDRE (Setup_fdre_C_D)        0.072    15.417    SHA_BOUCHRA/hash_reg[250]
+  -------------------------------------------------------------------
+                         required time                         15.417    <hidden>
+                         arrival time                         -14.713    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.705    <hidden>
+
+
+
+
+
+Min Delay Paths
+--------------------------------------------------------------------------------------
+Slack (MET) :             0.134ns  (arrival time - required time)
+  Source:                 SYSTEM/STORAGE_ADAPTER/storage_ok_reg/C
+                            (rising edge-triggered cell FDRE clocked by clk_test  {rise@0.000ns fall@6.667ns period=13.333ns})
+  Destination:            SYSTEM/CONTROLLER/result_status_reg[1]/D
+                            (rising edge-triggered cell FDRE clocked by clk_test  {rise@0.000ns fall@6.667ns period=13.333ns})
+  Path Group:             clk_test
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk_test rise@0.000ns - clk_test rise@0.000ns)
+  Data Path Delay:        0.370ns  (logic 0.239ns (64.609%)  route 0.131ns (35.391%))
+  Logic Levels:           1  (LUT2=1)
+  Clock Path Skew:        0.145ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    0.993ns
+    Source Clock Delay      (SCD):    0.639ns
+    Clock Pessimism Removal (CPR):    0.209ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_test rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=0)                   0.000     0.000    clk
+                         IBUF (Prop_ibuf_I_O)         0.179     0.179 r  clk_IBUF_inst/O
+                         net (fo=1, unplaced)         0.320     0.499    clk_IBUF
+                         BUFG (Prop_bufg_I_O)         0.026     0.525 r  clk_IBUF_BUFG_inst/O
+                         net (fo=2948, unplaced)      0.114     0.639    SYSTEM/STORAGE_ADAPTER/clk_IBUF_BUFG
+                         FDRE                                         r  SYSTEM/STORAGE_ADAPTER/storage_ok_reg/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_fdre_C_Q)         0.141     0.780 f  SYSTEM/STORAGE_ADAPTER/storage_ok_reg/Q
+                         net (fo=4, unplaced)         0.131     0.911    SYSTEM/CONTROLLER/storage_ok
+                         LUT2 (Prop_lut2_I1_O)        0.098     1.009 r  SYSTEM/CONTROLLER/result_status[1]_i_1/O
+                         net (fo=1, unplaced)         0.000     1.009    SYSTEM/CONTROLLER/result_status[1]_i_1_n_0
+                         FDRE                                         r  SYSTEM/CONTROLLER/result_status_reg[1]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_test rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=0)                   0.000     0.000    clk
+                         IBUF (Prop_ibuf_I_O)         0.368     0.368 r  clk_IBUF_inst/O
+                         net (fo=1, unplaced)         0.337     0.705    clk_IBUF
+                         BUFG (Prop_bufg_I_O)         0.029     0.734 r  clk_IBUF_BUFG_inst/O
+                         net (fo=2948, unplaced)      0.259     0.993    SYSTEM/CONTROLLER/clk_IBUF_BUFG
+                         FDRE                                         r  SYSTEM/CONTROLLER/result_status_reg[1]/C
+                         clock pessimism             -0.209     0.784    <hidden>
+                         FDRE (Hold_fdre_C_D)         0.091     0.875    SYSTEM/CONTROLLER/result_status_reg[1]
+  -------------------------------------------------------------------
+                         required time                         -0.875    <hidden>
+                         arrival time                           1.009    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.134    <hidden>
+
+Slack (MET) :             0.134ns  (arrival time - required time)
+  Source:                 SHA_BOUCHRA/c_reg[31]/C
+                            (rising edge-triggered cell FDRE clocked by clk_test  {rise@0.000ns fall@6.667ns period=13.333ns})
+  Destination:            SHA_BOUCHRA/d_reg[31]/D
+                            (rising edge-triggered cell FDRE clocked by clk_test  {rise@0.000ns fall@6.667ns period=13.333ns})
+  Path Group:             clk_test
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk_test rise@0.000ns - clk_test rise@0.000ns)
+  Data Path Delay:        0.370ns  (logic 0.242ns (65.415%)  route 0.128ns (34.585%))
+  Logic Levels:           1  (LUT3=1)
+  Clock Path Skew:        0.145ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    0.993ns
+    Source Clock Delay      (SCD):    0.639ns
+    Clock Pessimism Removal (CPR):    0.209ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_test rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=0)                   0.000     0.000    clk
+                         IBUF (Prop_ibuf_I_O)         0.179     0.179 r  clk_IBUF_inst/O
+                         net (fo=1, unplaced)         0.320     0.499    clk_IBUF
+                         BUFG (Prop_bufg_I_O)         0.026     0.525 r  clk_IBUF_BUFG_inst/O
+                         net (fo=2948, unplaced)      0.114     0.639    SHA_BOUCHRA/clk_IBUF_BUFG
+                         FDRE                                         r  SHA_BOUCHRA/c_reg[31]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_fdre_C_Q)         0.141     0.780 r  SHA_BOUCHRA/c_reg[31]/Q
+                         net (fo=3, unplaced)         0.128     0.908    SHA_BOUCHRA/c_reg_n_0_[31]
+                         LUT3 (Prop_lut3_I2_O)        0.101     1.009 r  SHA_BOUCHRA/d[31]_i_1/O
+                         net (fo=1, unplaced)         0.000     1.009    SHA_BOUCHRA/d[31]_i_1_n_0
+                         FDRE                                         r  SHA_BOUCHRA/d_reg[31]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_test rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=0)                   0.000     0.000    clk
+                         IBUF (Prop_ibuf_I_O)         0.368     0.368 r  clk_IBUF_inst/O
+                         net (fo=1, unplaced)         0.337     0.705    clk_IBUF
+                         BUFG (Prop_bufg_I_O)         0.029     0.734 r  clk_IBUF_BUFG_inst/O
+                         net (fo=2948, unplaced)      0.259     0.993    SHA_BOUCHRA/clk_IBUF_BUFG
+                         FDRE                                         r  SHA_BOUCHRA/d_reg[31]/C
+                         clock pessimism             -0.209     0.784    <hidden>
+                         FDRE (Hold_fdre_C_D)         0.091     0.875    SHA_BOUCHRA/d_reg[31]
+  -------------------------------------------------------------------
+                         required time                         -0.875    <hidden>
+                         arrival time                           1.009    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.134    <hidden>
+
+Slack (MET) :             0.136ns  (arrival time - required time)
+  Source:                 SHA_BOUCHRA/b_reg[12]/C
+                            (rising edge-triggered cell FDRE clocked by clk_test  {rise@0.000ns fall@6.667ns period=13.333ns})
+  Destination:            SHA_BOUCHRA/c_reg[12]/D
+                            (rising edge-triggered cell FDRE clocked by clk_test  {rise@0.000ns fall@6.667ns period=13.333ns})
+  Path Group:             clk_test
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk_test rise@0.000ns - clk_test rise@0.000ns)
+  Data Path Delay:        0.372ns  (logic 0.239ns (64.264%)  route 0.133ns (35.736%))
+  Logic Levels:           1  (LUT3=1)
+  Clock Path Skew:        0.145ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    0.993ns
+    Source Clock Delay      (SCD):    0.639ns
+    Clock Pessimism Removal (CPR):    0.209ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_test rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=0)                   0.000     0.000    clk
+                         IBUF (Prop_ibuf_I_O)         0.179     0.179 r  clk_IBUF_inst/O
+                         net (fo=1, unplaced)         0.320     0.499    clk_IBUF
+                         BUFG (Prop_bufg_I_O)         0.026     0.525 r  clk_IBUF_BUFG_inst/O
+                         net (fo=2948, unplaced)      0.114     0.639    SHA_BOUCHRA/clk_IBUF_BUFG
+                         FDRE                                         r  SHA_BOUCHRA/b_reg[12]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_fdre_C_Q)         0.141     0.780 r  SHA_BOUCHRA/b_reg[12]/Q
+                         net (fo=5, unplaced)         0.133     0.913    SHA_BOUCHRA/b_reg_n_0_[12]
+                         LUT3 (Prop_lut3_I2_O)        0.098     1.011 r  SHA_BOUCHRA/c[12]_i_1/O
+                         net (fo=1, unplaced)         0.000     1.011    SHA_BOUCHRA/c[12]_i_1_n_0
+                         FDRE                                         r  SHA_BOUCHRA/c_reg[12]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_test rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=0)                   0.000     0.000    clk
+                         IBUF (Prop_ibuf_I_O)         0.368     0.368 r  clk_IBUF_inst/O
+                         net (fo=1, unplaced)         0.337     0.705    clk_IBUF
+                         BUFG (Prop_bufg_I_O)         0.029     0.734 r  clk_IBUF_BUFG_inst/O
+                         net (fo=2948, unplaced)      0.259     0.993    SHA_BOUCHRA/clk_IBUF_BUFG
+                         FDRE                                         r  SHA_BOUCHRA/c_reg[12]/C
+                         clock pessimism             -0.209     0.784    <hidden>
+                         FDRE (Hold_fdre_C_D)         0.091     0.875    SHA_BOUCHRA/c_reg[12]
+  -------------------------------------------------------------------
+                         required time                         -0.875    <hidden>
+                         arrival time                           1.011    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.136    <hidden>
+
+Slack (MET) :             0.136ns  (arrival time - required time)
+  Source:                 SHA_BOUCHRA/b_reg[14]/C
+                            (rising edge-triggered cell FDRE clocked by clk_test  {rise@0.000ns fall@6.667ns period=13.333ns})
+  Destination:            SHA_BOUCHRA/c_reg[14]/D
+                            (rising edge-triggered cell FDRE clocked by clk_test  {rise@0.000ns fall@6.667ns period=13.333ns})
+  Path Group:             clk_test
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk_test rise@0.000ns - clk_test rise@0.000ns)
+  Data Path Delay:        0.372ns  (logic 0.239ns (64.264%)  route 0.133ns (35.736%))
+  Logic Levels:           1  (LUT3=1)
+  Clock Path Skew:        0.145ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    0.993ns
+    Source Clock Delay      (SCD):    0.639ns
+    Clock Pessimism Removal (CPR):    0.209ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_test rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=0)                   0.000     0.000    clk
+                         IBUF (Prop_ibuf_I_O)         0.179     0.179 r  clk_IBUF_inst/O
+                         net (fo=1, unplaced)         0.320     0.499    clk_IBUF
+                         BUFG (Prop_bufg_I_O)         0.026     0.525 r  clk_IBUF_BUFG_inst/O
+                         net (fo=2948, unplaced)      0.114     0.639    SHA_BOUCHRA/clk_IBUF_BUFG
+                         FDRE                                         r  SHA_BOUCHRA/b_reg[14]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_fdre_C_Q)         0.141     0.780 r  SHA_BOUCHRA/b_reg[14]/Q
+                         net (fo=5, unplaced)         0.133     0.913    SHA_BOUCHRA/b_reg_n_0_[14]
+                         LUT3 (Prop_lut3_I2_O)        0.098     1.011 r  SHA_BOUCHRA/c[14]_i_1/O
+                         net (fo=1, unplaced)         0.000     1.011    SHA_BOUCHRA/c[14]_i_1_n_0
+                         FDRE                                         r  SHA_BOUCHRA/c_reg[14]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_test rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=0)                   0.000     0.000    clk
+                         IBUF (Prop_ibuf_I_O)         0.368     0.368 r  clk_IBUF_inst/O
+                         net (fo=1, unplaced)         0.337     0.705    clk_IBUF
+                         BUFG (Prop_bufg_I_O)         0.029     0.734 r  clk_IBUF_BUFG_inst/O
+                         net (fo=2948, unplaced)      0.259     0.993    SHA_BOUCHRA/clk_IBUF_BUFG
+                         FDRE                                         r  SHA_BOUCHRA/c_reg[14]/C
+                         clock pessimism             -0.209     0.784    <hidden>
+                         FDRE (Hold_fdre_C_D)         0.091     0.875    SHA_BOUCHRA/c_reg[14]
+  -------------------------------------------------------------------
+                         required time                         -0.875    <hidden>
+                         arrival time                           1.011    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.136    <hidden>
+
+Slack (MET) :             0.136ns  (arrival time - required time)
+  Source:                 SHA_BOUCHRA/b_reg[17]/C
+                            (rising edge-triggered cell FDRE clocked by clk_test  {rise@0.000ns fall@6.667ns period=13.333ns})
+  Destination:            SHA_BOUCHRA/c_reg[17]/D
+                            (rising edge-triggered cell FDRE clocked by clk_test  {rise@0.000ns fall@6.667ns period=13.333ns})
+  Path Group:             clk_test
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (clk_test rise@0.000ns - clk_test rise@0.000ns)
+  Data Path Delay:        0.372ns  (logic 0.239ns (64.264%)  route 0.133ns (35.736%))
+  Logic Levels:           1  (LUT3=1)
+  Clock Path Skew:        0.145ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    0.993ns
+    Source Clock Delay      (SCD):    0.639ns
+    Clock Pessimism Removal (CPR):    0.209ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_test rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=0)                   0.000     0.000    clk
+                         IBUF (Prop_ibuf_I_O)         0.179     0.179 r  clk_IBUF_inst/O
+                         net (fo=1, unplaced)         0.320     0.499    clk_IBUF
+                         BUFG (Prop_bufg_I_O)         0.026     0.525 r  clk_IBUF_BUFG_inst/O
+                         net (fo=2948, unplaced)      0.114     0.639    SHA_BOUCHRA/clk_IBUF_BUFG
+                         FDRE                                         r  SHA_BOUCHRA/b_reg[17]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_fdre_C_Q)         0.141     0.780 r  SHA_BOUCHRA/b_reg[17]/Q
+                         net (fo=5, unplaced)         0.133     0.913    SHA_BOUCHRA/b_reg_n_0_[17]
+                         LUT3 (Prop_lut3_I2_O)        0.098     1.011 r  SHA_BOUCHRA/c[17]_i_1/O
+                         net (fo=1, unplaced)         0.000     1.011    SHA_BOUCHRA/c[17]_i_1_n_0
+                         FDRE                                         r  SHA_BOUCHRA/c_reg[17]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_test rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=0)                   0.000     0.000    clk
+                         IBUF (Prop_ibuf_I_O)         0.368     0.368 r  clk_IBUF_inst/O
+                         net (fo=1, unplaced)         0.337     0.705    clk_IBUF
+                         BUFG (Prop_bufg_I_O)         0.029     0.734 r  clk_IBUF_BUFG_inst/O
+                         net (fo=2948, unplaced)      0.259     0.993    SHA_BOUCHRA/clk_IBUF_BUFG
+                         FDRE                                         r  SHA_BOUCHRA/c_reg[17]/C
+                         clock pessimism             -0.209     0.784    <hidden>
+                         FDRE (Hold_fdre_C_D)         0.091     0.875    SHA_BOUCHRA/c_reg[17]
+  -------------------------------------------------------------------
+                         required time                         -0.875    <hidden>
+                         arrival time                           1.011    <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.136    <hidden>
+
+
+
+
+
+Pulse Width Checks
+--------------------------------------------------------------------------------------
+Clock Name:         clk_test
+Waveform(ns):       { 0.000 6.667 }
+Period(ns):         13.333
+Sources:            { clk }
+
+Check Type        Corner  Lib Pin             Reference Pin  Required(ns)  Actual(ns)  Slack(ns)  Location  Pin
+Min Period        n/a     RAMB36E1/CLKARDCLK  n/a            2.472         13.333      10.861               SYSTEM/STORAGE_ADAPTER/STORAGE/mem_reg_0/CLKARDCLK
+Min Period        n/a     RAMB36E1/CLKBWRCLK  n/a            2.472         13.333      10.861               SYSTEM/STORAGE_ADAPTER/STORAGE/mem_reg_0/CLKBWRCLK
+Min Period        n/a     RAMB36E1/CLKARDCLK  n/a            2.472         13.333      10.861               SYSTEM/STORAGE_ADAPTER/STORAGE/mem_reg_1/CLKARDCLK
+Min Period        n/a     RAMB36E1/CLKBWRCLK  n/a            2.472         13.333      10.861               SYSTEM/STORAGE_ADAPTER/STORAGE/mem_reg_1/CLKBWRCLK
+Min Period        n/a     RAMB36E1/CLKARDCLK  n/a            2.472         13.333      10.861               SYSTEM/STORAGE_ADAPTER/STORAGE/mem_reg_2/CLKARDCLK
+Low Pulse Width   Slow    FDRE/C              n/a            0.500         6.666       6.166                SHA_BOUCHRA/a_reg[0]/C
+Low Pulse Width   Fast    FDRE/C              n/a            0.500         6.666       6.166                SHA_BOUCHRA/a_reg[0]/C
+Low Pulse Width   Slow    FDRE/C              n/a            0.500         6.666       6.166                SHA_BOUCHRA/a_reg[10]/C
+Low Pulse Width   Fast    FDRE/C              n/a            0.500         6.666       6.166                SHA_BOUCHRA/a_reg[10]/C
+Low Pulse Width   Slow    FDRE/C              n/a            0.500         6.666       6.166                SHA_BOUCHRA/a_reg[11]/C
+High Pulse Width  Slow    FDRE/C              n/a            0.500         6.667       6.167                SHA_BOUCHRA/a_reg[0]/C
+High Pulse Width  Fast    FDRE/C              n/a            0.500         6.667       6.167                SHA_BOUCHRA/a_reg[0]/C
+High Pulse Width  Slow    FDRE/C              n/a            0.500         6.667       6.167                SHA_BOUCHRA/a_reg[10]/C
+High Pulse Width  Fast    FDRE/C              n/a            0.500         6.667       6.167                SHA_BOUCHRA/a_reg[10]/C
+High Pulse Width  Slow    FDRE/C              n/a            0.500         6.667       6.167                SHA_BOUCHRA/a_reg[11]/C
+
+
+
+--------------------------------------------------------------------------------------
+Path Group:  (none)
+From Clock:  clk_test
+  To Clock:  
+
+Max Delay          1000 Endpoints
+Min Delay          1000 Endpoints
+--------------------------------------------------------------------------------------
+
+
+Max Delay Paths
+--------------------------------------------------------------------------------------
+Slack:                    inf
+  Source:                 SYSTEM/CONTROLLER/FSM_onehot_state_reg[5]/C
+                            (rising edge-triggered cell FDSE clocked by clk_test  {rise@0.000ns fall@6.667ns period=13.333ns})
+  Destination:            busy
+                            (output port)
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        3.884ns  (logic 2.971ns (76.479%)  route 0.914ns (23.521%))
+  Logic Levels:           2  (LUT1=1 OBUF=1)
+  Clock Uncertainty:      0.025ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.050ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_test rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=0)                   0.000     0.000    clk
+                         IBUF (Prop_ibuf_I_O)         0.882     0.882 r  clk_IBUF_inst/O
+                         net (fo=1, unplaced)         0.646     1.528    clk_IBUF
+                         BUFG (Prop_bufg_I_O)         0.081     1.609 r  clk_IBUF_BUFG_inst/O
+                         net (fo=2948, unplaced)      0.584     2.193    SYSTEM/CONTROLLER/clk_IBUF_BUFG
+                         FDSE                                         r  SYSTEM/CONTROLLER/FSM_onehot_state_reg[5]/C
+  -------------------------------------------------------------------    -------------------
+                         FDSE (Prop_fdse_C_Q)         0.379     2.572 f  SYSTEM/CONTROLLER/FSM_onehot_state_reg[5]/Q
+                         net (fo=5, unplaced)         0.268     2.840    SYSTEM/CONTROLLER/Q[4]
+                         LUT1 (Prop_lut1_I0_O)        0.232     3.072 r  SYSTEM/CONTROLLER/busy_OBUF_inst_i_1/O
+                         net (fo=1, unplaced)         0.646     3.717    busy_OBUF
+                         OBUF (Prop_obuf_I_O)         2.360     6.077 r  busy_OBUF_inst/O
+                         net (fo=0)                   0.000     6.077    busy
+                                                                      r  busy
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 SYSTEM/CONTROLLER/next_index_reg[0]/C
+                            (rising edge-triggered cell FDRE clocked by clk_test  {rise@0.000ns fall@6.667ns period=13.333ns})
+  Destination:            builder_index[0]
+                            (output port)
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        3.539ns  (logic 2.894ns (81.759%)  route 0.646ns (18.241%))
+  Logic Levels:           1  (OBUF=1)
+  Clock Uncertainty:      0.025ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.050ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_test rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=0)                   0.000     0.000    clk
+                         IBUF (Prop_ibuf_I_O)         0.882     0.882 r  clk_IBUF_inst/O
+                         net (fo=1, unplaced)         0.646     1.528    clk_IBUF
+                         BUFG (Prop_bufg_I_O)         0.081     1.609 r  clk_IBUF_BUFG_inst/O
+                         net (fo=2948, unplaced)      0.584     2.193    SYSTEM/CONTROLLER/clk_IBUF_BUFG
+                         FDRE                                         r  SYSTEM/CONTROLLER/next_index_reg[0]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_fdre_C_Q)         0.397     2.590 r  SYSTEM/CONTROLLER/next_index_reg[0]/Q
+                         net (fo=11, unplaced)        0.646     3.235    next_index_OBUF[0]
+                         OBUF (Prop_obuf_I_O)         2.497     5.732 r  builder_index_OBUF[0]_inst/O
+                         net (fo=0)                   0.000     5.732    builder_index[0]
+                                                                      r  builder_index[0]
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 SYSTEM/CONTROLLER/next_index_reg[10]/C
+                            (rising edge-triggered cell FDRE clocked by clk_test  {rise@0.000ns fall@6.667ns period=13.333ns})
+  Destination:            builder_index[10]
+                            (output port)
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        3.539ns  (logic 2.894ns (81.759%)  route 0.646ns (18.241%))
+  Logic Levels:           1  (OBUF=1)
+  Clock Uncertainty:      0.025ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.050ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_test rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=0)                   0.000     0.000    clk
+                         IBUF (Prop_ibuf_I_O)         0.882     0.882 r  clk_IBUF_inst/O
+                         net (fo=1, unplaced)         0.646     1.528    clk_IBUF
+                         BUFG (Prop_bufg_I_O)         0.081     1.609 r  clk_IBUF_BUFG_inst/O
+                         net (fo=2948, unplaced)      0.584     2.193    SYSTEM/CONTROLLER/clk_IBUF_BUFG
+                         FDRE                                         r  SYSTEM/CONTROLLER/next_index_reg[10]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_fdre_C_Q)         0.397     2.590 r  SYSTEM/CONTROLLER/next_index_reg[10]/Q
+                         net (fo=6, unplaced)         0.646     3.235    next_index_OBUF[10]
+                         OBUF (Prop_obuf_I_O)         2.497     5.732 r  builder_index_OBUF[10]_inst/O
+                         net (fo=0)                   0.000     5.732    builder_index[10]
+                                                                      r  builder_index[10]
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 SYSTEM/CONTROLLER/next_index_reg[11]/C
+                            (rising edge-triggered cell FDRE clocked by clk_test  {rise@0.000ns fall@6.667ns period=13.333ns})
+  Destination:            builder_index[11]
+                            (output port)
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        3.539ns  (logic 2.894ns (81.759%)  route 0.646ns (18.241%))
+  Logic Levels:           1  (OBUF=1)
+  Clock Uncertainty:      0.025ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.050ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_test rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=0)                   0.000     0.000    clk
+                         IBUF (Prop_ibuf_I_O)         0.882     0.882 r  clk_IBUF_inst/O
+                         net (fo=1, unplaced)         0.646     1.528    clk_IBUF
+                         BUFG (Prop_bufg_I_O)         0.081     1.609 r  clk_IBUF_BUFG_inst/O
+                         net (fo=2948, unplaced)      0.584     2.193    SYSTEM/CONTROLLER/clk_IBUF_BUFG
+                         FDRE                                         r  SYSTEM/CONTROLLER/next_index_reg[11]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_fdre_C_Q)         0.397     2.590 r  SYSTEM/CONTROLLER/next_index_reg[11]/Q
+                         net (fo=6, unplaced)         0.646     3.235    next_index_OBUF[11]
+                         OBUF (Prop_obuf_I_O)         2.497     5.732 r  builder_index_OBUF[11]_inst/O
+                         net (fo=0)                   0.000     5.732    builder_index[11]
+                                                                      r  builder_index[11]
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 SYSTEM/CONTROLLER/next_index_reg[12]/C
+                            (rising edge-triggered cell FDRE clocked by clk_test  {rise@0.000ns fall@6.667ns period=13.333ns})
+  Destination:            builder_index[12]
+                            (output port)
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        3.539ns  (logic 2.894ns (81.759%)  route 0.646ns (18.241%))
+  Logic Levels:           1  (OBUF=1)
+  Clock Uncertainty:      0.025ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.050ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_test rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=0)                   0.000     0.000    clk
+                         IBUF (Prop_ibuf_I_O)         0.882     0.882 r  clk_IBUF_inst/O
+                         net (fo=1, unplaced)         0.646     1.528    clk_IBUF
+                         BUFG (Prop_bufg_I_O)         0.081     1.609 r  clk_IBUF_BUFG_inst/O
+                         net (fo=2948, unplaced)      0.584     2.193    SYSTEM/CONTROLLER/clk_IBUF_BUFG
+                         FDRE                                         r  SYSTEM/CONTROLLER/next_index_reg[12]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_fdre_C_Q)         0.397     2.590 r  SYSTEM/CONTROLLER/next_index_reg[12]/Q
+                         net (fo=6, unplaced)         0.646     3.235    next_index_OBUF[12]
+                         OBUF (Prop_obuf_I_O)         2.497     5.732 r  builder_index_OBUF[12]_inst/O
+                         net (fo=0)                   0.000     5.732    builder_index[12]
+                                                                      r  builder_index[12]
+  -------------------------------------------------------------------    -------------------
+
+
+
+
+
+Min Delay Paths
+--------------------------------------------------------------------------------------
+Slack:                    inf
+  Source:                 SYSTEM/CONTROLLER/previous_hash_reg[0]/C
+                            (rising edge-triggered cell FDRE clocked by clk_test  {rise@0.000ns fall@6.667ns period=13.333ns})
+  Destination:            builder_prev_hash[0]
+                            (output port)
+  Path Group:             (none)
+  Path Type:              Min at Fast Process Corner
+  Data Path Delay:        1.645ns  (logic 1.325ns (80.539%)  route 0.320ns (19.461%))
+  Logic Levels:           1  (OBUF=1)
+  Clock Uncertainty:      0.025ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.050ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_test rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=0)                   0.000     0.000    clk
+                         IBUF (Prop_ibuf_I_O)         0.179     0.179 r  clk_IBUF_inst/O
+                         net (fo=1, unplaced)         0.320     0.499    clk_IBUF
+                         BUFG (Prop_bufg_I_O)         0.026     0.525 r  clk_IBUF_BUFG_inst/O
+                         net (fo=2948, unplaced)      0.114     0.639    SYSTEM/CONTROLLER/clk_IBUF_BUFG
+                         FDRE                                         r  SYSTEM/CONTROLLER/previous_hash_reg[0]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_fdre_C_Q)         0.141     0.780 r  SYSTEM/CONTROLLER/previous_hash_reg[0]/Q
+                         net (fo=3, unplaced)         0.320     1.100    previous_hash_OBUF[0]
+                         OBUF (Prop_obuf_I_O)         1.184     2.284 r  builder_prev_hash_OBUF[0]_inst/O
+                         net (fo=0)                   0.000     2.284    builder_prev_hash[0]
+                                                                      r  builder_prev_hash[0]
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 SYSTEM/CONTROLLER/previous_hash_reg[100]/C
+                            (rising edge-triggered cell FDRE clocked by clk_test  {rise@0.000ns fall@6.667ns period=13.333ns})
+  Destination:            builder_prev_hash[100]
+                            (output port)
+  Path Group:             (none)
+  Path Type:              Min at Fast Process Corner
+  Data Path Delay:        1.645ns  (logic 1.325ns (80.539%)  route 0.320ns (19.461%))
+  Logic Levels:           1  (OBUF=1)
+  Clock Uncertainty:      0.025ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.050ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_test rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=0)                   0.000     0.000    clk
+                         IBUF (Prop_ibuf_I_O)         0.179     0.179 r  clk_IBUF_inst/O
+                         net (fo=1, unplaced)         0.320     0.499    clk_IBUF
+                         BUFG (Prop_bufg_I_O)         0.026     0.525 r  clk_IBUF_BUFG_inst/O
+                         net (fo=2948, unplaced)      0.114     0.639    SYSTEM/CONTROLLER/clk_IBUF_BUFG
+                         FDRE                                         r  SYSTEM/CONTROLLER/previous_hash_reg[100]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_fdre_C_Q)         0.141     0.780 r  SYSTEM/CONTROLLER/previous_hash_reg[100]/Q
+                         net (fo=3, unplaced)         0.320     1.100    previous_hash_OBUF[100]
+                         OBUF (Prop_obuf_I_O)         1.184     2.284 r  builder_prev_hash_OBUF[100]_inst/O
+                         net (fo=0)                   0.000     2.284    builder_prev_hash[100]
+                                                                      r  builder_prev_hash[100]
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 SYSTEM/CONTROLLER/previous_hash_reg[101]/C
+                            (rising edge-triggered cell FDRE clocked by clk_test  {rise@0.000ns fall@6.667ns period=13.333ns})
+  Destination:            builder_prev_hash[101]
+                            (output port)
+  Path Group:             (none)
+  Path Type:              Min at Fast Process Corner
+  Data Path Delay:        1.645ns  (logic 1.325ns (80.539%)  route 0.320ns (19.461%))
+  Logic Levels:           1  (OBUF=1)
+  Clock Uncertainty:      0.025ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.050ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_test rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=0)                   0.000     0.000    clk
+                         IBUF (Prop_ibuf_I_O)         0.179     0.179 r  clk_IBUF_inst/O
+                         net (fo=1, unplaced)         0.320     0.499    clk_IBUF
+                         BUFG (Prop_bufg_I_O)         0.026     0.525 r  clk_IBUF_BUFG_inst/O
+                         net (fo=2948, unplaced)      0.114     0.639    SYSTEM/CONTROLLER/clk_IBUF_BUFG
+                         FDRE                                         r  SYSTEM/CONTROLLER/previous_hash_reg[101]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_fdre_C_Q)         0.141     0.780 r  SYSTEM/CONTROLLER/previous_hash_reg[101]/Q
+                         net (fo=3, unplaced)         0.320     1.100    previous_hash_OBUF[101]
+                         OBUF (Prop_obuf_I_O)         1.184     2.284 r  builder_prev_hash_OBUF[101]_inst/O
+                         net (fo=0)                   0.000     2.284    builder_prev_hash[101]
+                                                                      r  builder_prev_hash[101]
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 SYSTEM/CONTROLLER/previous_hash_reg[102]/C
+                            (rising edge-triggered cell FDRE clocked by clk_test  {rise@0.000ns fall@6.667ns period=13.333ns})
+  Destination:            builder_prev_hash[102]
+                            (output port)
+  Path Group:             (none)
+  Path Type:              Min at Fast Process Corner
+  Data Path Delay:        1.645ns  (logic 1.325ns (80.539%)  route 0.320ns (19.461%))
+  Logic Levels:           1  (OBUF=1)
+  Clock Uncertainty:      0.025ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.050ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_test rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=0)                   0.000     0.000    clk
+                         IBUF (Prop_ibuf_I_O)         0.179     0.179 r  clk_IBUF_inst/O
+                         net (fo=1, unplaced)         0.320     0.499    clk_IBUF
+                         BUFG (Prop_bufg_I_O)         0.026     0.525 r  clk_IBUF_BUFG_inst/O
+                         net (fo=2948, unplaced)      0.114     0.639    SYSTEM/CONTROLLER/clk_IBUF_BUFG
+                         FDRE                                         r  SYSTEM/CONTROLLER/previous_hash_reg[102]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_fdre_C_Q)         0.141     0.780 r  SYSTEM/CONTROLLER/previous_hash_reg[102]/Q
+                         net (fo=3, unplaced)         0.320     1.100    previous_hash_OBUF[102]
+                         OBUF (Prop_obuf_I_O)         1.184     2.284 r  builder_prev_hash_OBUF[102]_inst/O
+                         net (fo=0)                   0.000     2.284    builder_prev_hash[102]
+                                                                      r  builder_prev_hash[102]
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 SYSTEM/CONTROLLER/previous_hash_reg[103]/C
+                            (rising edge-triggered cell FDRE clocked by clk_test  {rise@0.000ns fall@6.667ns period=13.333ns})
+  Destination:            builder_prev_hash[103]
+                            (output port)
+  Path Group:             (none)
+  Path Type:              Min at Fast Process Corner
+  Data Path Delay:        1.645ns  (logic 1.325ns (80.539%)  route 0.320ns (19.461%))
+  Logic Levels:           1  (OBUF=1)
+  Clock Uncertainty:      0.025ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.050ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_test rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=0)                   0.000     0.000    clk
+                         IBUF (Prop_ibuf_I_O)         0.179     0.179 r  clk_IBUF_inst/O
+                         net (fo=1, unplaced)         0.320     0.499    clk_IBUF
+                         BUFG (Prop_bufg_I_O)         0.026     0.525 r  clk_IBUF_BUFG_inst/O
+                         net (fo=2948, unplaced)      0.114     0.639    SYSTEM/CONTROLLER/clk_IBUF_BUFG
+                         FDRE                                         r  SYSTEM/CONTROLLER/previous_hash_reg[103]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_fdre_C_Q)         0.141     0.780 r  SYSTEM/CONTROLLER/previous_hash_reg[103]/Q
+                         net (fo=3, unplaced)         0.320     1.100    previous_hash_OBUF[103]
+                         OBUF (Prop_obuf_I_O)         1.184     2.284 r  builder_prev_hash_OBUF[103]_inst/O
+                         net (fo=0)                   0.000     2.284    builder_prev_hash[103]
+                                                                      r  builder_prev_hash[103]
+  -------------------------------------------------------------------    -------------------
+
+
+
+
+
+--------------------------------------------------------------------------------------
+Path Group:  (none)
+From Clock:  
+  To Clock:  clk_test
+
+Max Delay          4068 Endpoints
+Min Delay          4068 Endpoints
+--------------------------------------------------------------------------------------
+
+
+Max Delay Paths
+--------------------------------------------------------------------------------------
+Slack:                    inf
+  Source:                 builder_done
+                            (input port)
+  Destination:            SYSTEM/CONTROLLER/FSM_onehot_state_reg[0]/CE
+                            (rising edge-triggered cell FDRE clocked by clk_test  {rise@0.000ns fall@6.667ns period=13.333ns})
+  Path Group:             (none)
+  Path Type:              Setup (Max at Slow Process Corner)
+  Data Path Delay:        3.065ns  (logic 1.197ns (39.062%)  route 1.868ns (60.938%))
+  Logic Levels:           4  (IBUF=1 LUT2=1 LUT6=2)
+  Clock Path Skew:        1.881ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    1.881ns
+    Source Clock Delay      (SCD):    0.000ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.025ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.050ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                                                      0.000     0.000 r  builder_done
+                         net (fo=0)                   0.000     0.000    builder_done
+                         IBUF (Prop_ibuf_I_O)         0.882     0.882 r  builder_done_IBUF_inst/O
+                         net (fo=1, unplaced)         0.646     1.528    SYSTEM/CONTROLLER/builder_done_IBUF
+                         LUT2 (Prop_lut2_I1_O)        0.105     1.633 r  SYSTEM/CONTROLLER/saved_header[351]_i_1/O
+                         net (fo=353, unplaced)       0.459     2.092    SYSTEM/CONTROLLER/saved_header[0]
+                         LUT6 (Prop_lut6_I0_O)        0.105     2.197 r  SYSTEM/CONTROLLER/FSM_onehot_state[9]_i_3/O
+                         net (fo=1, unplaced)         0.347     2.544    SYSTEM/CONTROLLER/FSM_onehot_state[9]_i_3_n_0
+                         LUT6 (Prop_lut6_I5_O)        0.105     2.649 r  SYSTEM/CONTROLLER/FSM_onehot_state[9]_i_1/O
+                         net (fo=13, unplaced)        0.416     3.065    SYSTEM/CONTROLLER/FSM_onehot_state[9]_i_1_n_0
+                         FDRE                                         r  SYSTEM/CONTROLLER/FSM_onehot_state_reg[0]/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_test rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=0)                   0.000     0.000    clk
+                         IBUF (Prop_ibuf_I_O)         0.751     0.751 r  clk_IBUF_inst/O
+                         net (fo=1, unplaced)         0.613     1.365    clk_IBUF
+                         BUFG (Prop_bufg_I_O)         0.077     1.442 r  clk_IBUF_BUFG_inst/O
+                         net (fo=2948, unplaced)      0.439     1.881    SYSTEM/CONTROLLER/clk_IBUF_BUFG
+                         FDRE                                         r  SYSTEM/CONTROLLER/FSM_onehot_state_reg[0]/C
+
+Slack:                    inf
+  Source:                 builder_done
+                            (input port)
+  Destination:            SYSTEM/CONTROLLER/FSM_onehot_state_reg[1]/CE
+                            (rising edge-triggered cell FDRE clocked by clk_test  {rise@0.000ns fall@6.667ns period=13.333ns})
+  Path Group:             (none)
+  Path Type:              Setup (Max at Slow Process Corner)
+  Data Path Delay:        3.065ns  (logic 1.197ns (39.062%)  route 1.868ns (60.938%))
+  Logic Levels:           4  (IBUF=1 LUT2=1 LUT6=2)
+  Clock Path Skew:        1.881ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    1.881ns
+    Source Clock Delay      (SCD):    0.000ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.025ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.050ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                                                      0.000     0.000 r  builder_done
+                         net (fo=0)                   0.000     0.000    builder_done
+                         IBUF (Prop_ibuf_I_O)         0.882     0.882 r  builder_done_IBUF_inst/O
+                         net (fo=1, unplaced)         0.646     1.528    SYSTEM/CONTROLLER/builder_done_IBUF
+                         LUT2 (Prop_lut2_I1_O)        0.105     1.633 r  SYSTEM/CONTROLLER/saved_header[351]_i_1/O
+                         net (fo=353, unplaced)       0.459     2.092    SYSTEM/CONTROLLER/saved_header[0]
+                         LUT6 (Prop_lut6_I0_O)        0.105     2.197 r  SYSTEM/CONTROLLER/FSM_onehot_state[9]_i_3/O
+                         net (fo=1, unplaced)         0.347     2.544    SYSTEM/CONTROLLER/FSM_onehot_state[9]_i_3_n_0
+                         LUT6 (Prop_lut6_I5_O)        0.105     2.649 r  SYSTEM/CONTROLLER/FSM_onehot_state[9]_i_1/O
+                         net (fo=13, unplaced)        0.416     3.065    SYSTEM/CONTROLLER/FSM_onehot_state[9]_i_1_n_0
+                         FDRE                                         r  SYSTEM/CONTROLLER/FSM_onehot_state_reg[1]/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_test rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=0)                   0.000     0.000    clk
+                         IBUF (Prop_ibuf_I_O)         0.751     0.751 r  clk_IBUF_inst/O
+                         net (fo=1, unplaced)         0.613     1.365    clk_IBUF
+                         BUFG (Prop_bufg_I_O)         0.077     1.442 r  clk_IBUF_BUFG_inst/O
+                         net (fo=2948, unplaced)      0.439     1.881    SYSTEM/CONTROLLER/clk_IBUF_BUFG
+                         FDRE                                         r  SYSTEM/CONTROLLER/FSM_onehot_state_reg[1]/C
+
+Slack:                    inf
+  Source:                 builder_done
+                            (input port)
+  Destination:            SYSTEM/CONTROLLER/FSM_onehot_state_reg[2]/CE
+                            (rising edge-triggered cell FDRE clocked by clk_test  {rise@0.000ns fall@6.667ns period=13.333ns})
+  Path Group:             (none)
+  Path Type:              Setup (Max at Slow Process Corner)
+  Data Path Delay:        3.065ns  (logic 1.197ns (39.062%)  route 1.868ns (60.938%))
+  Logic Levels:           4  (IBUF=1 LUT2=1 LUT6=2)
+  Clock Path Skew:        1.881ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    1.881ns
+    Source Clock Delay      (SCD):    0.000ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.025ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.050ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                                                      0.000     0.000 r  builder_done
+                         net (fo=0)                   0.000     0.000    builder_done
+                         IBUF (Prop_ibuf_I_O)         0.882     0.882 r  builder_done_IBUF_inst/O
+                         net (fo=1, unplaced)         0.646     1.528    SYSTEM/CONTROLLER/builder_done_IBUF
+                         LUT2 (Prop_lut2_I1_O)        0.105     1.633 r  SYSTEM/CONTROLLER/saved_header[351]_i_1/O
+                         net (fo=353, unplaced)       0.459     2.092    SYSTEM/CONTROLLER/saved_header[0]
+                         LUT6 (Prop_lut6_I0_O)        0.105     2.197 r  SYSTEM/CONTROLLER/FSM_onehot_state[9]_i_3/O
+                         net (fo=1, unplaced)         0.347     2.544    SYSTEM/CONTROLLER/FSM_onehot_state[9]_i_3_n_0
+                         LUT6 (Prop_lut6_I5_O)        0.105     2.649 r  SYSTEM/CONTROLLER/FSM_onehot_state[9]_i_1/O
+                         net (fo=13, unplaced)        0.416     3.065    SYSTEM/CONTROLLER/FSM_onehot_state[9]_i_1_n_0
+                         FDRE                                         r  SYSTEM/CONTROLLER/FSM_onehot_state_reg[2]/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_test rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=0)                   0.000     0.000    clk
+                         IBUF (Prop_ibuf_I_O)         0.751     0.751 r  clk_IBUF_inst/O
+                         net (fo=1, unplaced)         0.613     1.365    clk_IBUF
+                         BUFG (Prop_bufg_I_O)         0.077     1.442 r  clk_IBUF_BUFG_inst/O
+                         net (fo=2948, unplaced)      0.439     1.881    SYSTEM/CONTROLLER/clk_IBUF_BUFG
+                         FDRE                                         r  SYSTEM/CONTROLLER/FSM_onehot_state_reg[2]/C
+
+Slack:                    inf
+  Source:                 builder_done
+                            (input port)
+  Destination:            SYSTEM/CONTROLLER/FSM_onehot_state_reg[3]/CE
+                            (rising edge-triggered cell FDRE clocked by clk_test  {rise@0.000ns fall@6.667ns period=13.333ns})
+  Path Group:             (none)
+  Path Type:              Setup (Max at Slow Process Corner)
+  Data Path Delay:        3.065ns  (logic 1.197ns (39.062%)  route 1.868ns (60.938%))
+  Logic Levels:           4  (IBUF=1 LUT2=1 LUT6=2)
+  Clock Path Skew:        1.881ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    1.881ns
+    Source Clock Delay      (SCD):    0.000ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.025ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.050ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                                                      0.000     0.000 r  builder_done
+                         net (fo=0)                   0.000     0.000    builder_done
+                         IBUF (Prop_ibuf_I_O)         0.882     0.882 r  builder_done_IBUF_inst/O
+                         net (fo=1, unplaced)         0.646     1.528    SYSTEM/CONTROLLER/builder_done_IBUF
+                         LUT2 (Prop_lut2_I1_O)        0.105     1.633 r  SYSTEM/CONTROLLER/saved_header[351]_i_1/O
+                         net (fo=353, unplaced)       0.459     2.092    SYSTEM/CONTROLLER/saved_header[0]
+                         LUT6 (Prop_lut6_I0_O)        0.105     2.197 r  SYSTEM/CONTROLLER/FSM_onehot_state[9]_i_3/O
+                         net (fo=1, unplaced)         0.347     2.544    SYSTEM/CONTROLLER/FSM_onehot_state[9]_i_3_n_0
+                         LUT6 (Prop_lut6_I5_O)        0.105     2.649 r  SYSTEM/CONTROLLER/FSM_onehot_state[9]_i_1/O
+                         net (fo=13, unplaced)        0.416     3.065    SYSTEM/CONTROLLER/FSM_onehot_state[9]_i_1_n_0
+                         FDRE                                         r  SYSTEM/CONTROLLER/FSM_onehot_state_reg[3]/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_test rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=0)                   0.000     0.000    clk
+                         IBUF (Prop_ibuf_I_O)         0.751     0.751 r  clk_IBUF_inst/O
+                         net (fo=1, unplaced)         0.613     1.365    clk_IBUF
+                         BUFG (Prop_bufg_I_O)         0.077     1.442 r  clk_IBUF_BUFG_inst/O
+                         net (fo=2948, unplaced)      0.439     1.881    SYSTEM/CONTROLLER/clk_IBUF_BUFG
+                         FDRE                                         r  SYSTEM/CONTROLLER/FSM_onehot_state_reg[3]/C
+
+Slack:                    inf
+  Source:                 builder_done
+                            (input port)
+  Destination:            SYSTEM/CONTROLLER/FSM_onehot_state_reg[4]/CE
+                            (rising edge-triggered cell FDRE clocked by clk_test  {rise@0.000ns fall@6.667ns period=13.333ns})
+  Path Group:             (none)
+  Path Type:              Setup (Max at Slow Process Corner)
+  Data Path Delay:        3.065ns  (logic 1.197ns (39.062%)  route 1.868ns (60.938%))
+  Logic Levels:           4  (IBUF=1 LUT2=1 LUT6=2)
+  Clock Path Skew:        1.881ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    1.881ns
+    Source Clock Delay      (SCD):    0.000ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.025ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.050ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                                                      0.000     0.000 r  builder_done
+                         net (fo=0)                   0.000     0.000    builder_done
+                         IBUF (Prop_ibuf_I_O)         0.882     0.882 r  builder_done_IBUF_inst/O
+                         net (fo=1, unplaced)         0.646     1.528    SYSTEM/CONTROLLER/builder_done_IBUF
+                         LUT2 (Prop_lut2_I1_O)        0.105     1.633 r  SYSTEM/CONTROLLER/saved_header[351]_i_1/O
+                         net (fo=353, unplaced)       0.459     2.092    SYSTEM/CONTROLLER/saved_header[0]
+                         LUT6 (Prop_lut6_I0_O)        0.105     2.197 r  SYSTEM/CONTROLLER/FSM_onehot_state[9]_i_3/O
+                         net (fo=1, unplaced)         0.347     2.544    SYSTEM/CONTROLLER/FSM_onehot_state[9]_i_3_n_0
+                         LUT6 (Prop_lut6_I5_O)        0.105     2.649 r  SYSTEM/CONTROLLER/FSM_onehot_state[9]_i_1/O
+                         net (fo=13, unplaced)        0.416     3.065    SYSTEM/CONTROLLER/FSM_onehot_state[9]_i_1_n_0
+                         FDRE                                         r  SYSTEM/CONTROLLER/FSM_onehot_state_reg[4]/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_test rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=0)                   0.000     0.000    clk
+                         IBUF (Prop_ibuf_I_O)         0.751     0.751 r  clk_IBUF_inst/O
+                         net (fo=1, unplaced)         0.613     1.365    clk_IBUF
+                         BUFG (Prop_bufg_I_O)         0.077     1.442 r  clk_IBUF_BUFG_inst/O
+                         net (fo=2948, unplaced)      0.439     1.881    SYSTEM/CONTROLLER/clk_IBUF_BUFG
+                         FDRE                                         r  SYSTEM/CONTROLLER/FSM_onehot_state_reg[4]/C
+
+
+
+
+
+Min Delay Paths
+--------------------------------------------------------------------------------------
+Slack:                    inf
+  Source:                 rst
+                            (input port)
+  Destination:            SHA_BOUCHRA/a_reg[0]/R
+                            (rising edge-triggered cell FDRE clocked by clk_test  {rise@0.000ns fall@6.667ns period=13.333ns})
+  Path Group:             (none)
+  Path Type:              Hold (Min at Fast Process Corner)
+  Data Path Delay:        0.499ns  (logic 0.179ns (35.877%)  route 0.320ns (64.123%))
+  Logic Levels:           1  (IBUF=1)
+  Clock Path Skew:        0.993ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    0.993ns
+    Source Clock Delay      (SCD):    0.000ns
+    Clock Pessimism Removal (CPR):    -0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                                                      0.000     0.000 r  rst
+                         net (fo=0)                   0.000     0.000    rst
+                         IBUF (Prop_ibuf_I_O)         0.179     0.179 r  rst_IBUF_inst/O
+                         net (fo=2639, unplaced)      0.320     0.499    SHA_BOUCHRA/rst_IBUF
+                         FDRE                                         r  SHA_BOUCHRA/a_reg[0]/R
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_test rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=0)                   0.000     0.000    clk
+                         IBUF (Prop_ibuf_I_O)         0.368     0.368 r  clk_IBUF_inst/O
+                         net (fo=1, unplaced)         0.337     0.705    clk_IBUF
+                         BUFG (Prop_bufg_I_O)         0.029     0.734 r  clk_IBUF_BUFG_inst/O
+                         net (fo=2948, unplaced)      0.259     0.993    SHA_BOUCHRA/clk_IBUF_BUFG
+                         FDRE                                         r  SHA_BOUCHRA/a_reg[0]/C
+
+Slack:                    inf
+  Source:                 rst
+                            (input port)
+  Destination:            SHA_BOUCHRA/a_reg[10]/R
+                            (rising edge-triggered cell FDRE clocked by clk_test  {rise@0.000ns fall@6.667ns period=13.333ns})
+  Path Group:             (none)
+  Path Type:              Hold (Min at Fast Process Corner)
+  Data Path Delay:        0.499ns  (logic 0.179ns (35.877%)  route 0.320ns (64.123%))
+  Logic Levels:           1  (IBUF=1)
+  Clock Path Skew:        0.993ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    0.993ns
+    Source Clock Delay      (SCD):    0.000ns
+    Clock Pessimism Removal (CPR):    -0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                                                      0.000     0.000 r  rst
+                         net (fo=0)                   0.000     0.000    rst
+                         IBUF (Prop_ibuf_I_O)         0.179     0.179 r  rst_IBUF_inst/O
+                         net (fo=2639, unplaced)      0.320     0.499    SHA_BOUCHRA/rst_IBUF
+                         FDRE                                         r  SHA_BOUCHRA/a_reg[10]/R
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_test rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=0)                   0.000     0.000    clk
+                         IBUF (Prop_ibuf_I_O)         0.368     0.368 r  clk_IBUF_inst/O
+                         net (fo=1, unplaced)         0.337     0.705    clk_IBUF
+                         BUFG (Prop_bufg_I_O)         0.029     0.734 r  clk_IBUF_BUFG_inst/O
+                         net (fo=2948, unplaced)      0.259     0.993    SHA_BOUCHRA/clk_IBUF_BUFG
+                         FDRE                                         r  SHA_BOUCHRA/a_reg[10]/C
+
+Slack:                    inf
+  Source:                 rst
+                            (input port)
+  Destination:            SHA_BOUCHRA/a_reg[13]/R
+                            (rising edge-triggered cell FDRE clocked by clk_test  {rise@0.000ns fall@6.667ns period=13.333ns})
+  Path Group:             (none)
+  Path Type:              Hold (Min at Fast Process Corner)
+  Data Path Delay:        0.499ns  (logic 0.179ns (35.877%)  route 0.320ns (64.123%))
+  Logic Levels:           1  (IBUF=1)
+  Clock Path Skew:        0.993ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    0.993ns
+    Source Clock Delay      (SCD):    0.000ns
+    Clock Pessimism Removal (CPR):    -0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                                                      0.000     0.000 r  rst
+                         net (fo=0)                   0.000     0.000    rst
+                         IBUF (Prop_ibuf_I_O)         0.179     0.179 r  rst_IBUF_inst/O
+                         net (fo=2639, unplaced)      0.320     0.499    SHA_BOUCHRA/rst_IBUF
+                         FDRE                                         r  SHA_BOUCHRA/a_reg[13]/R
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_test rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=0)                   0.000     0.000    clk
+                         IBUF (Prop_ibuf_I_O)         0.368     0.368 r  clk_IBUF_inst/O
+                         net (fo=1, unplaced)         0.337     0.705    clk_IBUF
+                         BUFG (Prop_bufg_I_O)         0.029     0.734 r  clk_IBUF_BUFG_inst/O
+                         net (fo=2948, unplaced)      0.259     0.993    SHA_BOUCHRA/clk_IBUF_BUFG
+                         FDRE                                         r  SHA_BOUCHRA/a_reg[13]/C
+
+Slack:                    inf
+  Source:                 rst
+                            (input port)
+  Destination:            SHA_BOUCHRA/a_reg[14]/R
+                            (rising edge-triggered cell FDRE clocked by clk_test  {rise@0.000ns fall@6.667ns period=13.333ns})
+  Path Group:             (none)
+  Path Type:              Hold (Min at Fast Process Corner)
+  Data Path Delay:        0.499ns  (logic 0.179ns (35.877%)  route 0.320ns (64.123%))
+  Logic Levels:           1  (IBUF=1)
+  Clock Path Skew:        0.993ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    0.993ns
+    Source Clock Delay      (SCD):    0.000ns
+    Clock Pessimism Removal (CPR):    -0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                                                      0.000     0.000 r  rst
+                         net (fo=0)                   0.000     0.000    rst
+                         IBUF (Prop_ibuf_I_O)         0.179     0.179 r  rst_IBUF_inst/O
+                         net (fo=2639, unplaced)      0.320     0.499    SHA_BOUCHRA/rst_IBUF
+                         FDRE                                         r  SHA_BOUCHRA/a_reg[14]/R
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_test rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=0)                   0.000     0.000    clk
+                         IBUF (Prop_ibuf_I_O)         0.368     0.368 r  clk_IBUF_inst/O
+                         net (fo=1, unplaced)         0.337     0.705    clk_IBUF
+                         BUFG (Prop_bufg_I_O)         0.029     0.734 r  clk_IBUF_BUFG_inst/O
+                         net (fo=2948, unplaced)      0.259     0.993    SHA_BOUCHRA/clk_IBUF_BUFG
+                         FDRE                                         r  SHA_BOUCHRA/a_reg[14]/C
+
+Slack:                    inf
+  Source:                 rst
+                            (input port)
+  Destination:            SHA_BOUCHRA/a_reg[15]/R
+                            (rising edge-triggered cell FDRE clocked by clk_test  {rise@0.000ns fall@6.667ns period=13.333ns})
+  Path Group:             (none)
+  Path Type:              Hold (Min at Fast Process Corner)
+  Data Path Delay:        0.499ns  (logic 0.179ns (35.877%)  route 0.320ns (64.123%))
+  Logic Levels:           1  (IBUF=1)
+  Clock Path Skew:        0.993ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    0.993ns
+    Source Clock Delay      (SCD):    0.000ns
+    Clock Pessimism Removal (CPR):    -0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                                                      0.000     0.000 r  rst
+                         net (fo=0)                   0.000     0.000    rst
+                         IBUF (Prop_ibuf_I_O)         0.179     0.179 r  rst_IBUF_inst/O
+                         net (fo=2639, unplaced)      0.320     0.499    SHA_BOUCHRA/rst_IBUF
+                         FDRE                                         r  SHA_BOUCHRA/a_reg[15]/R
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_test rise edge)
+                                                      0.000     0.000 r  <hidden>
+                                                      0.000     0.000 r  clk
+                         net (fo=0)                   0.000     0.000    clk
+                         IBUF (Prop_ibuf_I_O)         0.368     0.368 r  clk_IBUF_inst/O
+                         net (fo=1, unplaced)         0.337     0.705    clk_IBUF
+                         BUFG (Prop_bufg_I_O)         0.029     0.734 r  clk_IBUF_BUFG_inst/O
+                         net (fo=2948, unplaced)      0.259     0.993    SHA_BOUCHRA/clk_IBUF_BUFG
+                         FDRE                                         r  SHA_BOUCHRA/a_reg[15]/C
+
+
+
+
+
