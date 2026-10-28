@@ -1,16 +1,10 @@
 
 `timescale 1ns/1ps
 
-module canfd_rx_tb_crc_error;
-
-    // ==========================================
-    // CONFIGURATION
-    // ==========================================
+module canfd_rx_tb_stuff_error;
 
     localparam integer CLK_FREQ = 100_000_000;
     localparam integer BIT_RATE = 1_000_000;
-
-    // Meme trame que le test DLC 8 valide.
     localparam integer PAYLOAD_BITS = 86;
     localparam integer FRAME_BITS = 124;
 
@@ -24,18 +18,18 @@ module canfd_rx_tb_crc_error;
 
     always #5 clk = ~clk;
 
-    // ==========================================
-    // SIGNAUX TX
-    // ==========================================
+    // ========================================
+    // TRANSMETTEUR
+    // ========================================
 
     wire can_tx;
     wire tx_busy;
     wire tx_done;
     wire ack_error;
 
-    // ==========================================
-    // SIGNAUX RX
-    // ==========================================
+    // ========================================
+    // RECEPTEUR
+    // ========================================
 
     wire sample_bit;
     wire sample_valid;
@@ -57,7 +51,6 @@ module canfd_rx_tb_crc_error;
     wire [16:0] crc_calc;
     wire [16:0] crc_recu;
     wire [3:0] sbc_recu;
-
     wire fsb_error;
     wire crc_done;
     wire crc_ok;
@@ -68,26 +61,25 @@ module canfd_rx_tb_crc_error;
     wire frame_done;
     wire frame_valid;
 
-    // ==========================================
-    // INJECTION D'UNE ERREUR
-    // ==========================================
+    // ========================================
+    // BUS AVEC INJECTION D'ERREUR
+    // ========================================
 
     reg inject_error = 1'b0;
+    reg injected = 1'b0;
 
-    // Bus normal :
-    //   TX AND NOT(ACK)
-    //
-    // Pendant l'injection :
-    //   inversion du bit TX sur le bus.
+    wire normal_bus = can_tx & ~ack_drive_low;
 
-    wire can_bus =
-        inject_error
-        ? ~can_tx
-        : (can_tx & ~ack_drive_low);
+    // Pendant l'injection, on impose le meme
+    // bit que les cinq bits precedents.
+    // Cela viole la regle du stuffing.
+    wire can_bus = inject_error ?
+                   rx.last_bit :
+                   normal_bus;
 
-    // ==========================================
-    // TRANSMETTEUR
-    // ==========================================
+    // ========================================
+    // INSTANCE TX
+    // ========================================
 
     canfd_tx #(
         .CLK_FREQ(CLK_FREQ)
@@ -108,9 +100,9 @@ module canfd_rx_tb_crc_error;
         .ack_error(ack_error)
     );
 
-    // ==========================================
-    // RECEPTEUR
-    // ==========================================
+    // ========================================
+    // INSTANCE RX
+    // ========================================
 
     canfd_rx #(
         .CLK_FREQ(CLK_FREQ),
@@ -154,95 +146,88 @@ module canfd_rx_tb_crc_error;
         .frame_valid(frame_valid)
     );
 
-    // ==========================================
-    // LOCALISATION DU CHAMP CRC
-    // ==========================================
+    // ========================================
+    // MEMORISER LES FIN DE TEST
+    // ========================================
 
-    reg seen_payload_done = 1'b0;
     reg seen_crc_done = 1'b0;
+    reg seen_frame_done = 1'b0;
     reg seen_tx_done = 1'b0;
 
-    integer crc_sample_count = 0;
-    integer injections = 0;
-
-    // Un bit est inverse dans le champ CRC.
-    // On compte les echantillons apres payload_done.
-    //
-    // Les premiers bits correspondent notamment
-    // au SBC et aux bits fixes de stuffing.
-    //
-    // Le 12e echantillon est cible pour toucher
-    // un bit CRC plutot que le SBC.
-
-    always @(negedge clk) begin
+    always @(posedge clk) begin
         if (rst) begin
-            seen_payload_done = 1'b0;
-            seen_crc_done = 1'b0;
-            seen_tx_done = 1'b0;
-            crc_sample_count = 0;
-            inject_error = 1'b0;
-            injections = 0;
+            seen_crc_done <= 0;
+            seen_frame_done <= 0;
+            seen_tx_done <= 0;
         end
         else begin
-            if (payload_done)
-                seen_payload_done = 1'b1;
-
             if (crc_done)
-                seen_crc_done = 1'b1;
+                seen_crc_done <= 1;
+
+            if (frame_done)
+                seen_frame_done <= 1;
 
             if (tx_done)
-                seen_tx_done = 1'b1;
-
-            if (seen_payload_done &&
-                !seen_crc_done &&
-                sample_valid) begin
-
-                crc_sample_count = crc_sample_count + 1;
-
-            end
-
-            // Maintient le bit inverse entre
-            // deux instants d'echantillonnage.
-            //
-            // Le numero de bit devra etre confirme
-            // sur le VCD si le RX est desynchronise.
-
-            if (seen_payload_done &&
-                !seen_crc_done &&
-                crc_sample_count == 11 &&
-                !inject_error &&
-                injections == 0) begin
-
-                inject_error = 1'b1;
-                injections = 1;
-
-                $display(
-                    "INJECTION CRC activee : t=%0t",
-                    $time
-                );
-            end
-
-            if (inject_error &&
-                crc_sample_count >= 12) begin
-
-                inject_error = 1'b0;
-
-                $display(
-                    "INJECTION CRC terminee : t=%0t",
-                    $time
-                );
-            end
+                seen_tx_done <= 1;
         end
     end
 
-    // ==========================================
-    // SCENARIO PRINCIPAL
-    // ==========================================
+    // ========================================
+    // INJECTION CIBLEE DU STUFFING
+    // ========================================
 
     initial begin
 
-        $dumpfile("canfd_crc_error.vcd");
-        $dumpvars(0, canfd_rx_tb_crc_error);
+        // Attendre la fin du reset.
+        wait (!rst);
+
+        // Le RX vient de recevoir cinq bits
+        // identiques et attend un stuffing.
+        wait (rx.run_count == 3'd5 &&
+              payload_done == 1'b0);
+
+        @(negedge clk);
+
+        $display("");
+        $display("=================================");
+        $display("INJECTION ERREUR STUFFING");
+        $display("=================================");
+
+        $display("Temps : %0t", $time);
+        $display("Dernier bit : %b", rx.last_bit);
+        $display("Run count : %0d", rx.run_count);
+        $display("Stuff count avant : %0d", stuff_count);
+
+        // Remplacer le stuffing par une valeur
+        // identique aux cinq bits precedents.
+        inject_error = 1'b1;
+        injected = 1'b1;
+
+        $display("Injection activee");
+
+        // Attendre l'echantillonnage du
+        // prochain bit par le recepteur.
+        @(posedge sample_valid);
+
+        // Conserver la corruption jusqu'a
+        // ce que le RX traite cet echantillon.
+        repeat (2) @(negedge clk);
+
+        inject_error = 1'b0;
+
+        $display("Injection terminee");
+        $display("Temps : %0t", $time);
+
+    end
+
+    // ========================================
+    // SCENARIO DE SIMULATION
+    // ========================================
+
+    initial begin
+
+        $dumpfile("canfd_stuff_error.vcd");
+        $dumpvars(0, canfd_rx_tb_stuff_error);
 
         repeat (5) @(negedge clk);
         rst = 1'b0;
@@ -253,70 +238,82 @@ module canfd_rx_tb_crc_error;
         @(negedge clk);
         start = 1'b0;
 
-        // Attendre le diagnostic CRC du recepteur.
-        wait (seen_crc_done);
+        // Attendre la fin de reception.
+        wait (seen_frame_done);
 
-        repeat (4) @(negedge clk);
+        @(negedge clk);
+        #1;
 
         $display("");
-        $display("======================================");
-        $display("TEST INJECTION ERREUR CRC - DLC 8");
-        $display("======================================");
+        $display("=================================");
+        $display("TEST ERREUR STUFFING - DLC 8");
+        $display("=================================");
 
+        $display("Injection       : %b", injected);
         $display("ID recu         : 0x%03h", rx_id);
         $display("DLC recu        : %0d", rx_dlc);
         $display("DATA recue      : 0x%016h", rx_data);
 
+        $display("Stuff count     : %0d", stuff_count);
+        $display("Stuff error     : %b", stuff_error);
+
+        $display("CRC calcule     : 0x%05h", crc_calc);
+        $display("CRC recu        : 0x%05h", crc_recu);
+        $display("CRC OK          : %b", crc_ok);
+
+        $display("Frame done      : %b", frame_done);
+        $display("Frame valid     : %b", frame_valid);
+        $display("FSB error       : %b", fsb_error);
+
         $display("");
-        $display("Injection       : %0d", injections);
-        $display("CRC TX original : 0x%05h", tx.crc_final);
-        $display("CRC calcule RX  : 0x%05h", crc_calc);
-        $display("CRC recu RX     : 0x%05h", crc_recu);
+        $display("=================================");
+        $display("RESULTAT TEST STUFFING");
+        $display("=================================");
 
-        $display("crc_done        : %b", crc_done);
-        $display("crc_ok          : %b", crc_ok);
-        $display("fsb_error       : %b", fsb_error);
-        $display("stuff_error     : %b", stuff_error);
-        $display("frame_valid     : %b", frame_valid);
-
-        $display("");
-        $display("======================================");
-        $display("RESULTAT");
-        $display("======================================");
-
-        if (injections == 1 &&
-            crc_calc !== crc_recu &&
+        if (injected == 1'b1 &&
+            stuff_error === 1'b1 &&
+            seen_crc_done &&
             crc_ok === 1'b0 &&
-            fsb_error === 1'b0) begin
+            frame_valid === 1'b0) begin
 
-            $display("PASS : ERREUR CRC DETECTEE");
+            $display(
+                "PASS : ERREUR STUFFING DETECTEE"
+            );
 
         end
         else begin
 
-            $display("FAIL : VERIFICATION CRC");
-            $display("Analyser le fichier VCD.");
+            $display(
+                "FAIL : TEST STUFFING"
+            );
+
         end
 
         $finish;
+
     end
 
-    // ==========================================
-    // TIMEOUT
-    // ==========================================
+    // ========================================
+    // TIMEOUT DE SECURITE
+    // ========================================
 
     initial begin
+
         #250000;
 
         $display("");
-        $display("FAIL : TIMEOUT CRC ERROR");
-        $display("Injection      : %0d", injections);
-        $display("Echantillons   : %0d", crc_sample_count);
-        $display("Payload termine: %b", seen_payload_done);
-        $display("CRC termine    : %b", seen_crc_done);
-        $display("TX termine     : %b", seen_tx_done);
+        $display("FAIL : TIMEOUT STUFF ERROR");
+
+        $display("Injection      : %b", injected);
+        $display("Stuff error    : %b", stuff_error);
+        $display("Payload count  : %0d", payload_count);
+        $display("Stuff count    : %0d", stuff_count);
+        $display("CRC done vu    : %b", seen_crc_done);
+        $display("Frame done vu  : %b", seen_frame_done);
+        $display("TX done vu     : %b", seen_tx_done);
 
         $finish;
+
     end
 
 endmodule
