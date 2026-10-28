@@ -1,6 +1,6 @@
 module blockchain_storage #(
     parameter ADDR_WIDTH = 4,
-    parameter DATA_WIDTH = 512,
+    parameter DATA_WIDTH = 608,
     parameter [DATA_WIDTH-1:0] GENESIS_DATA = {{(DATA_WIDTH-1){1'b0}}, 1'b1}
 )(
     input wire clk,
