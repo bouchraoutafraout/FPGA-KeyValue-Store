@@ -3,10 +3,12 @@
 module blockchain_storage_tb;
 
     parameter ADDR_WIDTH = 4;
-    parameter DATA_WIDTH = 512;
+    parameter DATA_WIDTH = 608;
     parameter CLK_PERIOD = 10;
     parameter DEPTH = 1 << ADDR_WIDTH;
     parameter [DATA_WIDTH-1:0] GENESIS = {{(DATA_WIDTH-1){1'b0}}, 1'b1};
+    localparam [DATA_WIDTH-1:0] B1 = {5{128'hA1B2C3D4_E5F60718_99887766_55443322}};
+    localparam [DATA_WIDTH-1:0] B2 = {5{128'hFEDCBA98_76543210_11223344_55667788}};
 
     reg clk;
     reg rst;
@@ -102,20 +104,20 @@ module blockchain_storage_tb;
         check(rd_valid && block_data_out == GENESIS, "Genesis lu correctement");
 
         $display("\n[TEST 2] Ajout et relecture des blocs 1 et 2");
-        write_block({4{128'hA1B2C3D4_E5F60718_99887766_55443322}});
+        write_block(B1);
         check(block_count == 2, "block_count = 2");
         read_block(1);
-        check(rd_valid && block_data_out == {4{128'hA1B2C3D4_E5F60718_99887766_55443322}}, "Bloc 1 relu");
-        write_block({4{128'hFEDCBA98_76543210_11223344_55667788}});
+        check(rd_valid && block_data_out == B1, "Bloc 1 relu");
+        write_block(B2);
         check(block_count == 3, "block_count = 3");
         read_block(2);
-        check(rd_valid && block_data_out == {4{128'hFEDCBA98_76543210_11223344_55667788}}, "Bloc 2 relu");
+        check(rd_valid && block_data_out == B2, "Bloc 2 relu");
 
         $display("\n[TEST 3] Relecture croisee : le Genesis n'a pas change");
         read_block(0);
         check(rd_valid && block_data_out == GENESIS, "Genesis intact");
         read_block(1);
-        check(rd_valid && block_data_out == {4{128'hA1B2C3D4_E5F60718_99887766_55443322}}, "Bloc 1 intact");
+        check(rd_valid && block_data_out == B1, "Bloc 1 intact");
 
         $display("\n[TEST 4] Lecture d'un index non ecrit");
         read_block(10);
