@@ -3,3 +3,21 @@ test8
 testhash1
 *.vcd
 Khadija/semaine4/sim_blockchain_storage
+# Icarus Verilog
+*.vvp
+*.vcd
+*.vvp.bak
+
+# Sauvegardes et fichiers temporaires
+*.bak
+*.before_*
+*.log
+*.tmp
+
+# Vivado
+.Xil/
+*.jou
+*.str
+*.cache/
+*.runs/
+*.sim/
