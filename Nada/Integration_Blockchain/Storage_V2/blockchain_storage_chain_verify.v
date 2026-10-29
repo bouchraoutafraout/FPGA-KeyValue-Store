@@ -32,8 +32,8 @@ module blockchain_storage_chain_verify (
     wire rd_en = (state==PREV_REQ || state==CUR_REQ);
     // Protect against writes during verification; do not silently lose user writes.
     wire storage_wr_en = wr_en && (state==IDLE) && !verify_start;
-    assign wr_ready = storage_ready && (state==IDLE) && !verify_start;
     wire storage_ready;
+    assign wr_ready = storage_ready && (state==IDLE) && !verify_start;
     assign verify_busy = (state != IDLE);
     blockchain_storage #(.ADDR_WIDTH(4),.DATA_WIDTH(608)) STORAGE (
         .clk(clk),.rst(rst),.wr_en(storage_wr_en),.block_data_in(block_data_in),
@@ -93,3 +93,4 @@ module blockchain_storage_chain_verify (
         end
     end
 endmodule
+
