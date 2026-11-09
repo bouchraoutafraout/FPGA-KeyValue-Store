@@ -1,4 +1,4 @@
-# Mini-Blockchain matérielle sur FPGA 🔗
+# Mini-Blockchain matérielle sur FPGA 
 
 **Conception, intégration et validation d'un registre chaîné sur FPGA Artix-7**, associant un moteur clé–valeur (*Cuckoo hashing*), un calcul SHA-256, un stockage en BRAM et une interface de commande UART. Un ensemble de modules CAN-FD a également été développé et évalué en simulation RTL.
 
@@ -35,30 +35,7 @@ Le calcul SHA-256 porte sur **352 bits (44 octets)** : index + hash précédent 
 - **Python**, **Streamlit**, **pyserial** pour le dashboard.
 - **Icarus Verilog** (`iverilog`, `vvp`) pour certains tests RTL.
 
-## Organisation du dépôt
 
-Les principaux chemins sont :
-
-```text
-Bouchra/
-  SHA256_ChainValidator_2026_10_28/  # SHA-256, vérificateur, testbenches
-Khadija/
-  semaine3/, semaine4/             # Tables, BRAM et stockage
-sanae/
-  semaine2/, semaine4/             # Cuckoo hashing, validation
-Nada/
-  CANFD/                            # Émission CAN-FD et tests
-  Integration_CANFD/                # Réception CAN-FD et tests
-  Integration_KV_CANFD/             # Adaptation CAN-FD / KVS
-  Integration_Finale/               # Intégration RTL et tests de robustesse
-  FPGA_Blockchain_Final/
-    RTL/uart_blockchain_top.v       # Top de la démonstration matérielle
-    Testbenches/                    # Tests UART et corruption simulée
-    Dashboard/
-      app.py
-      fpga_uart.py
-      requirements.txt
-```
 
 > Plusieurs variantes historiques de modules existent dans le dépôt. Pour la démonstration matérielle présentée ici, le top utilisé est **`uart_blockchain_top`**. Éviter de compiler simultanément des copies de modules portant le même nom.
 
